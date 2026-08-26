@@ -1,0 +1,100 @@
+site_name: CReSIS Remote Users Wiki
+site_description: >-
+  Doing real radar work on the CReSIS / Open Polar Radar servers when you are
+  not at KU.
+site_url: https://rice-glaciology.github.io/cresis-remote-wiki/
+repo_url: https://github.com/rice-glaciology/cresis_tutorials
+repo_name: cresis_tutorials
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Follow system theme
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Background:
+      - Where these data come from: background/history.md
+  - Getting started:
+      - Accounts and first day: getting-started/accounts.md
+      - ThinLinc: getting-started/thinlinc.md
+      - SSH and tmux: getting-started/ssh-and-tmux.md
+      - VS Code Remote-SSH: getting-started/vscode-remote-ssh.md
+      - Moving data in and out: getting-started/file-transfer.md
+  - Working remotely:
+      - MATLAB from a distance: working-remotely/matlab.md
+      - Running the cluster: working-remotely/cluster.md
+      - Storage and file paths: working-remotely/storage-and-paths.md
+      - Claude Code: working-remotely/claude-code.md
+  - Doing science:
+      - Finding data: doing-science/finding-data.md
+      - Prototype locally, scale remotely: doing-science/prototyping-loop.md
+      - Fabric from quad-pol: doing-science/fabric-polarimetry.md
+      - Cross-track swath picking: doing-science/swath-cross-track-picking.md
+  - Reference:
+      - What the data look like: reference/data-files.md
+      - Troubleshooting: reference/troubleshooting.md
+      - Map into the OPR wiki: reference/opr-wiki-map.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  social:
+    - icon: fontawesome/solid/envelope
+      link: mailto:opr@openpolarradar.org
+      name: OPR support
+
+strict: true
