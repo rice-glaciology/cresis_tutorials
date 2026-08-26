@@ -1,4 +1,4 @@
-# Working on the CReSIS servers, remotely
+# Working on the CReSIS servers
 
 This github page is intended as a practical guide for working with radar data on the CReSIS / Open Polar Radar (OPR) servers at the University of Kansas from Rice.
 The cresis servers host OPR data, the OPR toolbox,  MATLAB licenses, and cluster resources to support processing and data analysis that our group uses to understand ice sheets. It's an important tool that folks in our group need to learn how to use responsibly and effectively.
