@@ -54,7 +54,7 @@ adds full-text search and navigation.
 
 ```bash
 make venv     # create .venv and install dependencies
-make serve    # live preview at http://127.0.0.1:8000/cresis-remote-wiki/
+make serve    # live preview at http://127.0.0.1:8000/cresis_tutorials/
 make build    # build into site/
 make help     # list every target
 ```
@@ -65,8 +65,13 @@ To publish to GitHub Pages:
 .venv/bin/mkdocs gh-deploy
 ```
 
-`site_url` in `mkdocs.yml` sets the base path (`/cresis-remote-wiki/`); change it
-if you deploy somewhere else, since the dev server mounts under the same prefix.
+`site_url` in `mkdocs.yml` sets the base path (`/cresis_tutorials/`, matching
+the repo name so GitHub Pages resolves); the dev server mounts under the same
+prefix, so bare `localhost:8000` redirects there.
+
+Note that GitHub Pages does not serve **private** repos on the free plan. While
+this repo is private, use `make serve` locally; `gh-deploy` becomes useful once
+it is made public.
 
 ## Testing
 

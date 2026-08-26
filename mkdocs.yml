@@ -2,7 +2,7 @@ site_name: CReSIS Remote Users Wiki
 site_description: >-
   Doing real radar work on the CReSIS / Open Polar Radar servers when you are
   not at KU.
-site_url: https://rice-glaciology.github.io/cresis-remote-wiki/
+site_url: https://rice-glaciology.github.io/cresis_tutorials/
 repo_url: https://github.com/rice-glaciology/cresis_tutorials
 repo_name: cresis_tutorials
 edit_uri: edit/main/docs/
