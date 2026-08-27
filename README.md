@@ -3,15 +3,10 @@
 A practical wiki for doing radar work on the CReSIS / Open Polar Radar (OPR)
 servers at the University of Kansas **when you are not at KU**.
 
-It is a curated layer, not a fork. [John Paden's OPR
-wiki](https://gitlab.com/openpolarradar/opr/-/wikis/home) stays authoritative
-for the toolbox — file formats, the parameter spreadsheet, radar internals, every
-processing step. These pages own the part it does not cover: getting connected
-and staying connected, surviving dropped links and time zones, running the
-cluster from far away, and prototyping locally before scaling remotely.
-[`docs/reference/opr-wiki-map.md`](docs/reference/opr-wiki-map.md) is an
-annotated index into the upstream wiki so you know which of its 353 pages to
-open.
+This is intended as a curated layer to help folks in the Rice Glaciology group learn how to use our computing resources and work with radar data stored at CReSIS. 
+[The OPR wiki](https://gitlab.com/openpolarradar/opr/-/wikis/home) is an authoritative reference for the toolbox — file formats, the parameter spreadsheet, radar internals, every processing step. 
+These pages will help you get connected and staying connected, surviving dropped links, running the cluster from machines here at Rice, and prototyping locally.
+[`docs/reference/opr-wiki-map.md`](docs/reference/opr-wiki-map.md) is an annotated index into the upstream wiki.
 
 ## Contents
 
