@@ -6,53 +6,32 @@ Working with the cresis servers you are about to access a very powerful tool tha
 
 Radar is the practical way to see through several hundred meters (up to 3-4 kilometers) of ice. Ice is transparent to radio waves, so a downward-looking radar can reveal information about internal layers and the ice-bed interface. Many traces collected and synthetically averaged in the along track, produce a **radargram**: a vertical slice through the ice sheet, which reveals information about the structure and physical properties of the ice sheet in space that can be used to understand present and past flow conditions.
 
-The returns are weak, the environment is enormous, and you need to cover continents. 
-That is an engineering problem as much as a science one, which is why the software you are about to use came out of an engineering
-centre.
-
 ## CReSIS
 
-The **Center for Remote Sensing of Ice Sheets** was established at the
-University of Kansas on 1 June 2005 as a National Science Foundation
-[Science and Technology Center](https://www.nsf.gov/od/oia/ia/stc), with an
-initial $19 million grant — one of only two STCs established that year. Its
-founding director was Prasad Gogineni.
+The **Center for Remote Sensing of Ice Sheets** was established at the University of Kansas on 1 June 2005 as a National Science Foundation
+[Science and Technology Center](https://www.nsf.gov/od/oia/ia/stc), with an initial $19 million grant.
 
-KU led it, with core partners at Elizabeth City State University, Haskell
-Indian Nations University, the University of Maine, Ohio State University and
-Penn State. A five-year renewal added a further $17.9 million, bringing the
-total NSF award to roughly $36.9 million, and the centre held STC status until
-2017.
+Other instiutions invovled in the center included Elizabeth City State University, Haskell Indian Nations University, the University of Maine, Ohio State University and Penn State. A five-year renewal added another $17.9 million, bringing the total NSF award to roughly $36.9 million. The centre held STC status until 2017.
 
-The mission was deliberately dual: build **new instruments** for measuring ice
-sheets, and build the **models and data systems** to interpret what they
-returned. That combination is why one organisation ended up owning radar
-hardware, the processing chain, the data archive and the picking tools — the
-whole stack you are about to work in.
+The mission had multiple parts, but their main objective was to build **new radar and seismic instruments** for measuring the physical properties of ice sheets, and build the **models and data systems** to interpret these data. 
+This lead to the development of what was first the cresis toolbox, and which is now known as the opr_toolbox.
+ 
+The center still exists at KU, now as the **Center for Remote Sensing and Integrated Systems** (broader remit to include projects connected to radar development for non-ice-sheet applications).
 
-The centre still exists at KU, now as the **Center for Remote Sensing and
-Integrated Systems** (same acronym, broader remit), directed by Carl Leuschen.
+### Instrument naming conventions
 
-### The instruments, and why frequency decides everything
+The centre already has a fleet of radars designed to target different features and different depths in the ice column.
 
-The centre already had a fleet of radars rather than one, and the reason is a
-single unavoidable trade-off.
+**Lower frequency radar pulses travel further through ice.** Transmission loss or attenuation, rises with
+frequency, so if you want to understand the base of a 2500m ice sheet, it's best to work below about 500 MHz.
 
-**Lower frequencies travel further through ice.** Transmission loss rises with
-frequency, so if you want an echo back from the bed through three kilometres of
-ice, you work below about 500 MHz.
+**Larger bandwidth systems (that necessarily transmit at higher freuqnecies produce finer resolution.** 
+Range resolution depends on bandwidth, and it's easier to increase bandwidth by transmitting at higher frequencies becuase of the geometry, size and shape of the antennas needed to produce these pulses. Centimeter-scale changes in seasonal snow reflectivity require gigahertz of bandwidth, which is not available down in the HF band.
 
-**Higher frequencies give finer resolution.** Range resolution depends on
-bandwidth, and you can only get wide bandwidth if the carrier is high enough to
-accommodate it. Centimetre-scale snow layering needs gigahertz of bandwidth,
-which is simply not available down in the VHF band.
+Because the targets of different campaigns are often location specific orienetned mostly by science questions (not always radar engineering) you build several instruments.
+These include the radar altimeter, the "snow" radar, the "accumulationa" radar, and the radio depth sounder, "rds". 
 
-You cannot have both, so you build several instruments. The accumulation
-radar's centre frequency was picked explicitly as the balance point between
-these two pressures.
-
-That trade-off is the organising principle of the whole archive. **The four
-frequency families are exactly the directories you will see on disk:**
+**The four frequency families are exactly the directories you will see on disk:**
 
 | Family | Band | Frequency | Sees | Directory |
 |---|---|---|---|---|
@@ -62,12 +41,10 @@ frequency families are exactly the directories you will see on disk:**
 | **Altimeters** | Ku- to Ka-band | ~12–38 GHz | The surface; minimal penetration | `kuband`, `kaband` |
 
 Read down that table and you are reading depth: `rds` reaches the bed, `accum`
-images the layered upper ice, `snow` resolves individual snow layers, and the
-altimeters barely get past the surface — which is the point, because surface
-elevation is what they are for.
+images the layered upper ice and the bed down to depths near 1500-2400m dependeing on the transmit power, `snow` resolves seasonal snow layering, and the
+altimeters barely transmits through the surface, but can often image the base of the sea-ice column.
 
-The four IceBridge instruments sit in that scheme as MCoRDS (`rds`), the
-accumulation radar (`accum`), the snow radar (`snow`) and the Ku-band altimeter
+The four IceBridge instruments sit in that scheme as MCoRDS (`rds`), the accumulation radar (`accum`), the snow radar (`snow`) and the Ku-band altimeter
 (`kuband`).
 
 When you see `accum` in a path you are looking at the UHF system — that is the
