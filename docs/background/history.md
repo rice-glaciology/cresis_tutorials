@@ -8,8 +8,7 @@ Radar is the practical way to see through several hundred meters (up to 3-4 kilo
 
 ## CReSIS
 
-The **Center for Remote Sensing of Ice Sheets** was established at the University of Kansas on 1 June 2005 as a National Science Foundation
-[Science and Technology Center](https://www.nsf.gov/od/oia/ia/stc), with an initial $19 million grant.
+The **Center for Remote Sensing of Ice Sheets** was established at the University of Kansas in June 2005 as a National Science Foundation [Science and Technology Center](https://www.nsf.gov/od/oia/ia/stc), with an initial $19 million grant.
 
 Other instiutions invovled in the center included Elizabeth City State University, Haskell Indian Nations University, the University of Maine, Ohio State University and Penn State. A five-year renewal added another $17.9 million, bringing the total NSF award to roughly $36.9 million. The centre held STC status until 2017.
 
@@ -20,7 +19,7 @@ The center still exists at KU, now as the **Center for Remote Sensing and Integr
 
 ### Instrument naming conventions
 
-The centre already has a fleet of radars designed to target different features and different depths in the ice column.
+The center already has a fleet of radars designed to target different features and different depths in the ice column.
 
 **Lower frequency radar pulses travel further through ice.** Transmission loss or attenuation, rises with
 frequency, so if you want to understand the base of a 2500m ice sheet, it's best to work below about 500 MHz.
@@ -49,54 +48,35 @@ When you see `accum` in a path you are looking at the UHF system — for several
 That is what makes [cross-track swath processing](../doing-science/swath-cross-track-picking.md)
 possible, and why some products carry an extra dimension.
 
-Each family also has a characteristic transmit architecture, which you will
-meet as `radar_type` in the toolbox: the snow and altimeter systems are **FMCW
-deramp-on-receive**, the depth sounders are **pulsed**, and the accumulation
-radars have been all three across their generations. See
-[what the data look like](../reference/data-files.md#why-there-are-five-radar-directories)
-for how the individual hardware generations map onto these directories.
+Each family also has a characteristic transmit pulse characterized by `radar_type` in the toolbox: the snow and altimeter systems are **FMCW
+deramp-on-receive**, the depth sounders are **pulsed**, and the accumulation radars have been all three across their generations. 
+See [what the data look like](../reference/data-files.md#why-there-are-five-radar-directories) for how the individual hardware generations map onto these directories.
 
 ## Operation IceBridge
 
-NASA's **ICESat** laser altimeter finished its service in 2009. Its successor,
-**ICESat-2**, would not launch until September 2018. A nine-year gap in
-satellite altimetry over the ice sheets, at exactly the moment they were
-starting to change quickly, was unacceptable.
+NASA's **ICESat** laser altimeter finished its service in 2009. Its successor, **ICESat-2**, would not launch until September 2018. To quickly bridge this nine-year gap in
+satellite altimetry over the ice sheets instruments flown with NASA aircraft as part of **Operation IceBridge** were flown from 2009 to 2019.
+As part of these missions, NASA flew instrumented aircraft over the Arctic, Antarctic and Alaska. 
+The first Arctic flights were in March 2009 over Greenland; Antarctic flights began that October. 
+The final polar flight was in November 2019, a year after ICESat-2 reached orbit.
 
-**Operation IceBridge** filled it with aircraft. From 2009 to 2019 — eleven
-years and more than a thousand survey flights — NASA flew instrumented aircraft
-over the Arctic, Antarctic and Alaska. The first Arctic flights were in March
-2009 over Greenland; Antarctic flights began that October. The final polar
-flight was in November 2019, a year after ICESat-2 reached orbit.
+CReSIS operated **four radar instruments** on IceBridge — MCoRDS, the snow radar, the Ku-band altimeter and the accumulation radar. 
+These systems, which changed year-to-year with improvements in radar hardware and signal processing software were fit to several aircraft: NASA P-3 Orion, the DC-8, a King Air B-200, a
+Gulfstream V and an HU-25C Falcon. 
+Data were managed by Indiana University (which has a strong history of storage and compute infrastructure).
 
-CReSIS operated **four radar instruments** on IceBridge — MCoRDS, the snow
-radar, the Ku-band altimeter and the accumulation radar — flying on a rotating
-cast of aircraft including the NASA P-3 Orion, the DC-8, a King Air B-200, a
-Gulfstream V and an HU-25C Falcon. Indiana University provided data management.
+The program provided an unprecedented volume of radar data flown with like instruments, processed consistently between seasons.
+The project's duration, flight coverage and original mission goals also inform the kinds of questions we can ask with these data. 
+The data volumes (and instrument vintage) also inform the conventions needed to handle the volume systematically.
+Generally, these data are labeled by year, location, and platform `YYYY_LOCATION_PLATFORM` as during a season that platform hardware remained consistent.
 
-This matters to you for a very practical reason: **IceBridge is why the archive
-is as large and as consistent as it is.** A decade of sustained, funded, annual
-flying with the same instruments and the same processing chain produced the
-seasons you will be searching through, and the file conventions you are about
-to learn were shaped by the need to handle that volume systematically. The
-`YYYY_LOCATION_PLATFORM` season naming exists because there were that many
-campaigns to keep straight.
-
-It is also why the toolbox has so much calibration machinery. Eleven years of
-different aircraft, different antenna installations and evolving hardware means
-every season has its own system time delay, its own channel equalization and
-its own quirks — all recorded per season in the parameter spreadsheets.
-
-Some of the science that came out of it is worth knowing: IceBridge found the
-longest canyon on Earth beneath the Greenland ice sheet, and its repeat surveys
-of Pine Island and Thwaites in West Antarctica underpin much of what we now
-think about marine ice-sheet instability.
+Some of the science that came out of it is worth knowing.
+IceBridge found the longest canyon on Earth beneath the Greenland ice sheet, and its repeat surveys of Pine Island and Thwaites in West Antarctica underpin much of what we now know about marine ice-sheet instability.
 
 ## Open Polar Radar
 
-The tools you are using are no longer a single centre's internal codebase.
-**[Open Polar Radar](https://openpolarradar.org/)** (OPR) is the successor
-effort: an open software ecosystem intended to consolidate polar radar software
+The tools you are using have evolved to also ingest data collected with other radar pltforms mainted as part of *[Open Polar Radar](https://openpolarradar.org/)** (OPR). 
+OPR is an open software ecosystem intended to consolidate polar radar software
 and standardise the datasets so they are searchable across institutions.
 
 Current collaborators include the Alfred Wegener Institute, the British
