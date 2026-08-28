@@ -29,7 +29,7 @@ frequency, so if you want to understand the base of a 2500m ice sheet, it's best
 Range resolution depends on bandwidth, and it's easier to increase bandwidth by transmitting at higher frequencies becuase of the geometry, size and shape of the antennas needed to produce these pulses. Centimeter-scale changes in seasonal snow reflectivity require gigahertz of bandwidth, which is not available down in the HF band.
 
 Because the targets of different campaigns are often location specific orienetned mostly by science questions (not always radar engineering) you build several instruments.
-These include the radar altimeter, the "snow" radar, the "accumulationa" radar, and the radio depth sounder, "rds". 
+These include the "ku/kaband" radar altimeter, the "snow" radar, the "accumulationa" radar, and the radio depth sounder, "rds". 
 
 **The four frequency families are exactly the directories you will see on disk:**
 
@@ -40,21 +40,13 @@ These include the radar altimeter, the "snow" radar, the "accumulationa" radar, 
 | **Snow radars** | L- to Ku-band | ~1–18 GHz | Shallow snow layers, snow on sea ice | `snow` |
 | **Altimeters** | Ku- to Ka-band | ~12–38 GHz | The surface; minimal penetration | `kuband`, `kaband` |
 
-Read down that table and you are reading depth: `rds` reaches the bed, `accum`
-images the layered upper ice and the bed down to depths near 1500-2400m dependeing on the transmit power, `snow` resolves seasonal snow layering, and the
-altimeters barely transmits through the surface, but can often image the base of the sea-ice column.
+This list is sorted according to decreasing depth penetration.  `rds` reaches the bed, `accum`
+images the layered upper ice and the bed down to depths near 1500-2400m dependeing on the transmit power, `snow` resolves seasonal snow layering, and the altimeters barely transmits through the surface, but can often image the base of the sea-ice column.
 
-The four IceBridge instruments sit in that scheme as MCoRDS (`rds`), the accumulation radar (`accum`), the snow radar (`snow`) and the Ku-band altimeter
-(`kuband`).
+When you see `accum` in a path you are looking at the UHF system — for several ground based seasons, these data transmit and receive pulses polarized in horizontal and vertical antenna orientations makeing it possible to use these methods to understand [ice fabric](../doing-science/fabric-polarimetry.md).
 
-When you see `accum` in a path you are looking at the UHF system — that is the
-one the [fabric work](../doing-science/fabric-polarimetry.md) uses in a
-ground-based configuration.
-
-"Multichannel" in MCoRDS is the important word for anything 3D: multiple
-antenna elements let you resolve the *direction* an echo came from, not just
-its delay. That is what makes
-[cross-track swath processing](../doing-science/swath-cross-track-picking.md)
+"Multichannel" in MCoRDS is the important for doing any 3D tomography where using multiple antenna elements we can resolve the *direction* an echo came from, not just its delay. 
+That is what makes [cross-track swath processing](../doing-science/swath-cross-track-picking.md)
 possible, and why some products carry an extra dimension.
 
 Each family also has a characteristic transmit architecture, which you will
