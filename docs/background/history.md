@@ -1,10 +1,6 @@
 # Where these data come from
 
-You are about to spend a lot of time with files that have names like
-`Data_20250108_02_009.mat`, produced by a MATLAB toolbox with a lot of
-accumulated convention in it. Most of that convention exists for a reason, and
-the reasons are historical. Fifteen minutes here will save you a lot of
-confusion later.
+Working with the cresis servers you are about to access a very powerful tool that has algorthimice and data storage conventions inherited from the the history of radar data collected across Antarctica and Greenland.
 
 ## The problem these instruments were built for
 
