@@ -1,13 +1,13 @@
 # Finding data
 
-Before you process anything you have to know which season, segment and frame
-you want. There are three ways in, and they suit different questions.
+Before you process anything you have to know which season, segment and frame you want to process. 
+There are three ways to do this that I use regularly.
 
-## Vocabulary
+## Season and year name
 
-The hierarchy is consistent across every tool:
+The hierarchy is consistent across all the data that have been collected:
 
-| Level | What it is | Example |
+| Level | Description | Example |
 |---|---|---|
 | **Radar system** | The instrument type | `accum`, `rds`, `snow`, `kuband`, `kaband` |
 | **Season** | One field campaign | `2024_Antarctica_Ground2` |
@@ -17,14 +17,13 @@ The hierarchy is consistent across every tool:
 Which is why products are addressed as
 `CSARP_<product>/<day_seg>/Data_<day_seg>_<frm>.mat`.
 
-Arctic and Antarctic live in **separate databases**, so a search returns
-whichever hemisphere you are pointed at.
+Arctic and Antarctic live in **separate databases**, so a search returns whichever hemisphere you are pointed at.
 
 ## The geoportal
 
 <https://openpolarradar.org/> — a web map over the Open Polar Server (OPS).
-Draw a polygon, get the flight lines and frames inside it. This is the right
-tool for "what has been flown over *here*".
+Draw a polygon, get the flight lines and frames inside it. 
+This is the right tool for "what has been flown over *here*".
 
 Useful behaviours:
 
