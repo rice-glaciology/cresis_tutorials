@@ -17,7 +17,7 @@ The hierarchy is consistent across all the data that have been collected:
 Which is why products are addressed as
 `CSARP_<product>/<day_seg>/Data_<day_seg>_<frm>.mat`.
 
-Arctic and Antarctic live in **separate databases**, so a search returns whichever hemisphere you are pointed at.
+Arctic and Antarctic live in **separate databases** organized by hemisphere (which also speaks to when the data were collected (austral summer/boreal summer).
 
 ## The geoportal
 
