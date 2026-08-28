@@ -55,8 +55,8 @@ See [what the data look like](../reference/data-files.md#why-there-are-five-rada
 ## Operation IceBridge
 
 NASA's **ICESat** laser altimeter finished its service in 2009. Its successor, **ICESat-2**, would not launch until September 2018. To quickly bridge this nine-year gap in
-satellite altimetry over the ice sheets instruments flown with NASA aircraft as part of **Operation IceBridge** were flown from 2009 to 2019.
-As part of these missions, NASA flew instrumented aircraft over the Arctic, Antarctic and Alaska. 
+satellite altimetry over the ice sheets, NASA quickly pivoted to airborne missions as part of **Operation IceBridge**.
+Missions included flights over the Arctic, Antarctic and Alaska. 
 The first Arctic flights were in March 2009 over Greenland; Antarctic flights began that October. 
 The final polar flight was in November 2019, a year after ICESat-2 reached orbit.
 
@@ -79,41 +79,35 @@ The tools you are using have evolved to also ingest data collected with other ra
 OPR is an open software ecosystem intended to consolidate polar radar software
 and standardise the datasets so they are searchable across institutions.
 
-Current collaborators include the Alfred Wegener Institute, the British
-Antarctic Survey, the Center for Oldest Ice Exploration, CECs in Chile, CReSIS,
-Lamont-Doherty, the National Institute of Polar Research, the Norwegian Polar
-Institute, Stanford Radio Glaciology, UTIG and the University of Washington.
+Current collaborators include the Alfred Wegener Institute, the British Antarctic Survey, CECs in Chile, CReSIS, Lamont-Doherty, the National Institute of Polar Research, the Norwegian Polar Institute, Stanford Radio Glaciology, UTIG and the University of Washington.
 
 Practically, this means:
 
 - The toolbox is public, on [GitLab](https://gitlab.com/openpolarradar/opr),
-  and you can contribute to it.
+  and you can contribute to it as you develop code.
 - Much of the processed data is public, at
   [data.cresis.ku.edu](https://data.cresis.ku.edu/) and through the
   [geoportal](https://openpolarradar.org/).
-- The naming still shows its history. You will see `cresis` in paths, `CSARP_`
-  prefixes on product directories (from "CReSIS SAR Processor"), and
-  `opr_` prefixes on newer functions. Same system, different eras.
+- Because of the history of the center the naming still ports from old conventions (i.e. you will see `cresis` in paths, `CSARP_`
+  prefixes on product directories (stands for "CReSIS SAR Processor"), and `opr_` prefixes on newer algorthims.
 
 ## What to read next
 
 - **[Finding data](../doing-science/finding-data.md)** — the vocabulary of
   seasons, segments and frames, and how to search geographically.
-- **[What the data look like](../reference/data-files.md)** — the directory
+- **[Working with data](../reference/data-files.md)** — the directory
   tree and what is actually inside an echogram file.
 
 ## Citing and acknowledging
 
-If you publish anything using these tools, you owe both a citation and an
-acknowledgment:
+If you publish anything using these tools, we should cite and acknowledge the toolbox:
 
 > Open Polar Radar. (2023). opr (Version 3.0.1) \[Computer software\].
 > <https://doi.org/10.5281/zenodo.5683959>
 
-The acknowledgment text, which lists the supporting NASA and NSF grants, is on
-the [OPR wiki home page](https://gitlab.com/openpolarradar/opr/-/wikis/home#acknowledgment).
-Use it verbatim. This infrastructure exists because it was funded, and the
-funding continues partly because people cite it.
+The acknowledgment text, which lists the supporting NASA and NSF grants, is on the [OPR wiki home page](https://gitlab.com/openpolarradar/opr/-/wikis/home#acknowledgment).
+Use it verbatim. 
+This infrastructure exists because it was funded, and the funding continues partly because people cite the work of the center.
 
 ## Sources
 
