@@ -2,23 +2,12 @@
 
 Working with the cresis servers you are about to access a very powerful tool that has algorthimice and data storage conventions inherited from the the history of radar data collected across Antarctica and Greenland.
 
-## The problem these instruments were built for
+## Why use radar?
 
-Ice sheets lose mass in two ways: they melt, and they flow into the ocean.
-Predicting sea-level rise means predicting the flow, and flow depends on things
-you cannot see from the surface — how thick the ice is, what the bed beneath it
-looks like, whether it is frozen or thawed, and how the ice itself is layered
-and deformed.
+Radar is the practical way to see through several hundred meters (up to 3-4 kilometers) of ice. Ice is transparent to radio waves, so a downward-looking radar can reveal information about internal layers and the ice-bed interface. Many traces collected and synthetically averaged in the along track, produce a **radargram**: a vertical slice through the ice sheet, which reveals information about the structure and physical properties of the ice sheet in space and time.
 
-Radar is the practical way to see through a couple of kilometres of ice. Ice is
-unusually transparent to radio waves, so a downward-looking radar returns
-echoes from the surface, from internal layers, and from the bed. Fly that
-instrument along a line and you get a **radargram**: a vertical slice through
-the ice sheet, which is what an echogram file contains.
-
-The catch is that the returns are weak, the environment is enormous, and you
-need to cover continents. That is an engineering problem as much as a science
-one, which is why the software you are about to use came out of an engineering
+The returns are weak, the environment is enormous, and you need to cover continents. 
+That is an engineering problem as much as a science one, which is why the software you are about to use came out of an engineering
 centre.
 
 ## CReSIS
