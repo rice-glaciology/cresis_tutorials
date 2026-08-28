@@ -4,7 +4,7 @@ Working with the cresis servers you are about to access a very powerful tool tha
 
 ## Why use radar?
 
-Radar is the practical way to see through several hundred meters (up to 3-4 kilometers) of ice. Ice is transparent to radio waves, so a downward-looking radar can reveal information about internal layers and the ice-bed interface. Many traces collected and synthetically averaged in the along track, produce a **radargram**: a vertical slice through the ice sheet, which reveals information about the structure and physical properties of the ice sheet in space and time.
+Radar is the practical way to see through several hundred meters (up to 3-4 kilometers) of ice. Ice is transparent to radio waves, so a downward-looking radar can reveal information about internal layers and the ice-bed interface. Many traces collected and synthetically averaged in the along track, produce a **radargram**: a vertical slice through the ice sheet, which reveals information about the structure and physical properties of the ice sheet in space that can be used to understand present and past flow conditions.
 
 The returns are weak, the environment is enormous, and you need to cover continents. 
 That is an engineering problem as much as a science one, which is why the software you are about to use came out of an engineering
