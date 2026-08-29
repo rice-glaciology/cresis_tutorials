@@ -151,11 +151,11 @@ outputs that never clobber batch products.
 
 ## Deploying the module on the servers
 
-- `fabric.m`, `fabric_task.m` can be moved to the `opr/matlab/processing/` folder, or keep them on your
-  personal path.
+- `fabric.m`, `fabric_task.m` can be moved to the `opr/matlab/processing/` folder, or kept in your
+  personal scratch directory.
 - `run_fabric.m` can be moved to your `run_opr` repo (`gRadar.path_override`), and edited per
   season.
-- `+ptt` → on the MATLAB path, e.g. `opr/matlab/+ptt` or your `run_opr` repo.
+- `+ptt` should be added to the MATLAB path, e.g. `opr/matlab/+ptt` or your `run_opr` repo.
 - For **compiled cluster modes**, add `{'fabric_task.m' 2}` to
   `gRadar.cluster.hidden_depend_funs` in `startup.m` and re-run
   `cluster_compile`. `cluster.type = 'debug'` needs none of this.
