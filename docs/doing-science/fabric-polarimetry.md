@@ -1,49 +1,37 @@
 # Fabric from quad-pol accumulation radar
 
-Inferring horizontal ice-crystal orientation fabric from polarimetric radar
-traveltimes, using the CReSIS ground-based accumulation radar. This page is the
-run order: what each stage needs, which script runs it, and what it writes.
+Here we walk through a tutorial that shows how we can infer horizontal ice-crystal orientation fabric from polarimetric radar traveltimes using the CReSIS ground-based accumulation radar.
+This page walks through the processing steps, demonstrates how to run the model and the figures that it writes.
 
 The method follows Rathmann (2026), *Inferring glacier ice-crystal orientation
 fabrics from oblique polarimetric radar* (Proc. R. Soc. A), implemented in a
 `+ptt` MATLAB package with a thin OPR adapter around it.
+f
 
-!!! note "This is a workflow guide, not a results page"
-    Site results and their caveats live with the project, not here. What
-    follows is how to *run* the chain.
+## What we are measuring
 
-## What you are measuring
-
-A birefringent ice column splits an incident wave into two orthogonally
-polarized modes travelling at slightly different speeds. Over depth this
-accumulates a **traveltime difference** between HH and VV, and the size of that
-difference constrains the horizontal fabric contrast
+A birefringent ice column splits an incident wave into two orthogonally polarized modes travelling at slightly different speeds. 
+Over depth this accumulates a **traveltime difference** between HH and VV, and the size of that difference constrains the horizontal fabric
 
 $$\Delta\lambda = \lambda_x - \lambda_y$$
 
-while the azimuth of the fast axis gives the fabric orientation $\theta_0$. The
-chain measures $\Delta\tau(\text{twtt}, x)$ and inverts it for
-$\Delta\lambda$ over depth intervals.
+The chain measures $\Delta\tau(\text{twtt}, x)$ and inverts it for $\Delta\lambda$ over depth intervals.
 
-## Prerequisites
-
-You need a season processed with **separate per-polarization products**. For
-`2024_Antarctica_Ground2` that is:
+For this example, we'll be focused on a season that has been processed with **separate per-polarization products**. 
+For `2024_Antarctica_Ground2` that is:
 
 ```
 CSARP_standard_HH/   CSARP_standard_VV/
 CSARP_standard_HV/   CSARP_standard_VH/
 ```
 
-Getting there is ordinary OPR processing — `qlook` / `sar` / `array` run per
-polarization channel. See `run_polarimetric.m` in the toolbox and the
-[Parameter Spreadsheet Guide](https://gitlab.com/openpolarradar/opr/-/wikis/Parameter-Spreadsheet-Guide).
+These products are generated running `qlook` / `sar` / `array` in the OPR processor for each polarization channel.
+See `run_polarimetric.m` in the toolbox and the
+[Parameter Spreadsheet Guide](https://gitlab.com/openpolarradar/opr/-/wikis/Parameter-Spreadsheet-Guide) for more information on this.
 
 !!! warning "The qlook products must be complex"
     If a season was processed with `inc_dec` non-zero, the products are
-    detected power and the HH/VV **phase difference is gone** — the whole
-    method depends on it. Check this per frame *before* launching a long batch;
-    discovering it eleven hours in is a bad way to spend a night.
+    detected power and the imaginary component of HH/VV which descibes the phase difference is gone. 
 
 ## Stage 1 — Polarimetric synthesis and coregistration
 
@@ -51,18 +39,16 @@ polarization channel. See `run_polarimetric.m` in the toolbox and the
 the reference and secondary channels, forms the multilooked interferogram and
 coherence, and optionally unwraps the phase with SNAPHU.
 
-Run it with:
+You can run this 
 
 ```matlab
 coregistration.en = true
 snaphu_en         = true    % strongly preferred
 ```
 
-Output: `CSARP_polarimetric` (or whatever you set `out_path` to — remember it,
-the next stage's `in_path` must match).
+The ouout will be located at `CSARP_polarimetric` (or whatever you set `out_path`. The next stage's `in_path` must match).
 
-This is the expensive stage. Coregistration runs tens of minutes per frame, and
-a tiled SNAPHU unwrap longer again.
+This is the expensive stage. Coregistration runs tens of minutes per frame.
 
 ## Stage 2 — Fabric inversion
 
@@ -72,11 +58,11 @@ Per frame it:
 1. **Estimates $\Delta\tau$** by one of three routes, set by
    `fabric.dtau_source`:
 
-    | `dtau_source` | How it works | When to use it |
-    |---|---|---|
-    | `'phase'` (default) | Blends coregistration row offsets (fixes sign and the integer fringe ambiguity) with interferogram phase (sub-ns precision). Uses SNAPHU-unwrapped phase when present. | The default. Best precision where coherence is good. |
-    | `'coreg'` | Row offsets alone. | Detected-power products, where no phase survives. |
-    | `'deltak'` | Split-spectrum ladder over the ref/sec SLC spectra, coarse-to-fine in synthetic wavelength. **Absolute** $\Delta\tau$, no unwrapping. | Low-coherence sites where SNAPHU produces region errors. Also a useful unwrap-free cross-check anywhere. |
+    | `dtau_source` | Description |
+    |---|---|
+    | `'phase'` (default) | Blends coregistration row offsets (fixes sign and the integer fringe ambiguity) with interferogram phase (sub-ns precision). Uses SNAPHU-unwrapped phase when present. |
+    | `'coreg'` | Row offsets alone. Uses detected-power products and no phase survives. |
+    | `'deltak'` | Split-spectrum ladder over the ref/sec SLC spectra, coarse-to-fine in synthetic wavelength. **Absolute** $\Delta\tau$, no unwrapping. Low-coherence sites where SNAPHU produces region errors. This is also a useful unwrap-free cross-check anywhere. |
 
     !!! danger "delta-k must use the raw `sec`, not `sec_reg`"
         `sec_reg` has been envelope-shifted by coregistration and carries no
@@ -86,15 +72,6 @@ Per frame it:
 2. **References $\Delta\tau$ to zero over a coherent band** just below the
    surface return, removing channel timing and phase biases and the unwrapping
    constant.
-
-    !!! warning "Use a band, not a single bin"
-        A single-bin reference injects its own error as a constant on every
-        node. Because a surface-anchored solve can only absorb a constant into
-        the shallowest interval, that error shows up as **spurious
-        near-surface fabric** — a real-looking signal that is pure artefact.
-        Set `fabric.ref_band_twtt`. The joint solve carries the residual as an
-        explicit offset nuisance, which makes interval 1 reference-degenerate:
-        **quotable fabric starts at interval 2.**
 
 3. **Averages into along-track blocks** with coherence weighting.
 
