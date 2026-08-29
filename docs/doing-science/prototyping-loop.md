@@ -1,9 +1,9 @@
-# Prototype locally, scale remotely
+# Prototype locally
 
 The most useful habit for remote work is keeping a **short loop on your own
 machine** and a **long loop on the servers**, with the same code running in
 both. Iterating on numerics over a 200 ms round trip, against a shared node,
-inside a GUI session, is miserable. Iterating on one frame locally is not.
+inside a GUI session can be challenging.
 
 The trick that makes this work is trivial and worth being strict about: **make
 your local directory layout mirror the server's.**
