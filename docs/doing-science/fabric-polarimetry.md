@@ -69,14 +69,12 @@ Per frame it:
         group delay. Delta-k needs the unregistered secondary SLC in the
         product, which roughly doubles task memory.
 
-2. **References $\Delta\tau$ to zero over a coherent band** just below the
-   surface return, removing channel timing and phase biases and the unwrapping
-   constant.
+2. **References $\Delta\tau$ to zero over a coherent band** just below the surface return, removing channel timing and phase biases and the unwrapping constant.
 
-3. **Averages into along-track blocks** with coherence weighting.
+3. **Average in along-track blocks** with coherence weighting.
 
 4. **Inverts** through a Maxwell-Garnett firn model for piecewise-constant
-   $\Delta\lambda$ over `num_intervals` depth intervals:
+   $\Delta\lambda$ over `num_intervals` depth interval:
 
     - `inversion = 'joint'` — smoothness-regularized joint solve. The module
       default, and robust to noisy data.
@@ -86,7 +84,7 @@ Output: `CSARP_<out_path>/<day_seg>/Data_*.mat` plus overview images.
 
 ## Running it
 
-### One frame, interactively
+### One fram
 
 `run_fabric.m` is the driver. The shape of it:
 
@@ -119,18 +117,17 @@ params = opr_set_params(params,'fabric.ptt',struct( ...
 ```
 
 Writing to `fabric_joint` rather than `fabric` keeps earlier stripping outputs
-in place for side-by-side comparison — worth doing whenever you change the
-solver.
+in place for side-by-side comparison.
 
 Start with `cluster.type = 'debug'`, which needs no compilation. Move to
 `'slurm'` only once a single frame runs clean.
 
 ### Whole seasons
 
-For batches that bypass `master.m` and the parameter spreadsheets entirely,
+For batches that bypass `master.m` and the parameter spreadsheets entirely, 
 `server/run_fabric_scratch.m` runs `fabric_task` over every frame of each input
-product in a per-product season table, writing to a **user scratch tree** rather
-than the shared season tree. `server/run_deltak_scratch.m` is the same shape
+product in a per-product season table, writing to a **user scratch directory** rather
+than the shared season directory. `server/run_deltak_scratch.m` is the same shape
 with `dtau_source = 'deltak'`, restricted to products that carry the complex
 ref/sec SLCs, so the two can be compared side by side.
 
@@ -140,14 +137,6 @@ Launch by hand from a `tmux` session:
 matlab -batch "run_fabric_scratch" > logs/fabric_$(date +%F).log 2>&1 &
 ```
 
-!!! tip "A bad frame must not cost the run"
-    Runtimes are long by nature — tens of minutes per frame for
-    coregistration, longer for a tiled SNAPHU unwrap, over surveys of dozens of
-    frames. Every batch here **warns and continues** per frame rather than
-    aborting, and names the skipped frames in the log tail. A figure that says
-    only "missing extract" cannot distinguish a failed frame from one that was
-    never requested.
-
 See [running the cluster remotely](../working-remotely/cluster.md) for
 detaching, monitoring, and picking up after an overnight failure.
 
@@ -155,17 +144,16 @@ detaching, monitoring, and picking up after an overnight failure.
 
 Coregistration caches (`stages/quadpol/coreg_cache/creg_<tag>.mat`) run to
 roughly 0.7 GB per frame and take inversion reruns down to about twelve minutes
-a frame. **Do not delete them casually** — they are the difference between
-iterating on the inversion in an afternoon and iterating over a week.
+a frame. **Do not delete coregistered data** as the inversion runs very quickly when these data already exist.
 
-Deep or special runs use a `z_max` override, which produces `_z<N>`-suffixed
+Deep runs use a `z_max` override, which produces `_z<N>`-suffixed
 outputs that never clobber batch products.
 
 ## Deploying the module on the servers
 
-- `fabric.m`, `fabric_task.m` → `opr/matlab/processing/`, or keep them on your
+- `fabric.m`, `fabric_task.m` can be moved to the `opr/matlab/processing/` folder, or keep them on your
   personal path.
-- `run_fabric.m` → your `run_opr` repo (`gRadar.path_override`), edited per
+- `run_fabric.m` can be moved to your `run_opr` repo (`gRadar.path_override`), and edited per
   season.
 - `+ptt` → on the MATLAB path, e.g. `opr/matlab/+ptt` or your `run_opr` repo.
 - For **compiled cluster modes**, add `{'fabric_task.m' 2}` to
@@ -177,10 +165,6 @@ outputs that never clobber batch products.
   `ptt.H`(r), `ptt.bco_depth`(r). Enable per segment via the `cmd` sheet
   `generic` column: `{{'fabric','fabric'}}`.
 
-!!! note
-    `master.m` currently only propagates `ctrl_chain`s for `analysis` generic
-    steps, so drive this through `run_fabric.m` until that one-line change is
-    upstreamed.
 
 Remember to [deploy edits atomically](../working-remotely/storage-and-paths.md#deploy-edits-atomically)
 — never truncate a script a running job is reading.
