@@ -1,12 +1,7 @@
 # Cross-track picking for multi-element swath data
 
-With a multi-element array you are no longer picking a single trace beneath the
-aircraft or sled. Array processing turns each range line into a **cross-track
-image** — energy resolved by direction of arrival — and the layer you want is a
-surface across track and along track, not a line.
-
-This page covers producing those 3D images and picking in them: the run order,
-the tools, and the parts that behave differently from `imb.picker`.
+With a multi-element array you are no longer picking a single trace beneath the aircraft or sled. 
+Array processing turns each range line into a **cross-track image** — energy resolved as a function of direction of arrival — and the layer you want is a across track and along track surface, not a line.
 
 !!! info "Different picker"
     2D echograms use `imb.picker`. 3D imagery uses **`imb.slice_browser`**, and
