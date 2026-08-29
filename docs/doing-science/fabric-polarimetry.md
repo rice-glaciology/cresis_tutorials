@@ -166,35 +166,20 @@ outputs that never clobber batch products.
   `generic` column: `{{'fabric','fabric'}}`.
 
 
-Remember to [deploy edits atomically](../working-remotely/storage-and-paths.md#deploy-edits-atomically)
-— never truncate a script a running job is reading.
+Remember to not truncate a script a running job is reading.
 
-## Validation habits
+## Trouble shooting habits
 
-These are the ones that have actually caught errors:
+These are tools I use to trouble shoot problems.
 
-- **Reproduce the failure on a synthetic before fixing it**, then re-run the
-  real validation frames from cache. A fix validated only on the data that
-  motivated it is not validated.
+- **Try to reproduce the failure on a synthetic test case before trying to fix the problem**, then re-run the
+  real validation frames from cache. 
 - **Check the chain against raw fringe density**, which is proportional to
-  $\Delta\lambda$ with no inversion involved. Calibrate against
-  `ptt.twttDifference` directly rather than a hand-derived constant — hand
-  deriving it drops the two-way factor that lives inside `twttDifference` and
-  produces a spurious factor of 2 that looks exactly like a real bug.
-- **Sweep the coherence gate on adjacent-block agreement, not misfit RMS.** RMS
-  is a post-regularization residual that always improves with more free
-  parameters, so it will happily endorse an overfit.
-- **Test whether a deep feature is a domain edge.** Sweep interval count,
-  column-model bed depth `H`, and record truncation depth. The decisive test:
-  an edge effect propagates inward, so values well above the cut must not move
-  when the cut moves.
+  $\Delta\lambda$.
 - **Never unwrap axis angles.** Smooth or interpolate the doubled-angle phasor
   instead. A 0/180 heading wrap in an interpolation is easy to introduce and
   very hard to see.
-- **Abstain rather than report the prior.** Returning `NaN` where the data
-  cannot support an answer is far more useful downstream than a plausible
-  number, and $\theta_0$ should never be depth-averaged through a region where
-  the axes rotate with depth.
+
 
 ## Next
 
