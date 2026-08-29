@@ -1,7 +1,6 @@
 # Finding data
 
-Before you process anything you have to know which season, segment and frame you want to process. 
-There are three ways to do this that I use regularly.
+Before you process any data you have to know which season, segment and frame you want to process. 
 
 ## Season and year name
 
@@ -14,7 +13,7 @@ The hierarchy is consistent across all the data that have been collected:
 | **Segment** | Continuous collection, record start to stop | `20250108_02` |
 | **Frame** | A chunk of a segment | `009` |
 
-Which is why products are addressed as
+These map to project directories following the convention:
 `CSARP_<product>/<day_seg>/Data_<day_seg>_<frm>.mat`.
 
 Arctic and Antarctic live in **separate databases** organized by hemisphere, which also tells you information about when the data were likely collected (austral summer/boreal summer).
