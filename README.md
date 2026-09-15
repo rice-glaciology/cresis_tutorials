@@ -1,11 +1,11 @@
 # CReSIS Remote Users Wiki
 
-A practical wiki for doing radar work on the CReSIS / Open Polar Radar (OPR)
-servers at the University of Kansas **when you are not at KU**.
+This is a practical wiki for doing radar work on the CReSIS / Open Polar Radar (OPR)
+servers at the University of Kansas for students and postdocs at Rice University.
 
-This is intended as a curated layer to help folks in the Rice Glaciology group learn how to use our computing resources and work with radar data stored at CReSIS. 
-[The OPR wiki](https://gitlab.com/openpolarradar/opr/-/wikis/home) is an authoritative reference for the toolbox — file formats, the parameter spreadsheet, radar internals, every processing step. 
-These pages will help you get connected and staying connected, surviving dropped links, running the cluster from machines here at Rice, and prototyping locally.
+This is intended as a curated guide to help folks in the Rice Glaciology group use our computing resources and work with radar data stored at CReSIS most effectively. 
+[The OPR wiki](https://gitlab.com/openpolarradar/opr/-/wikis/home) is an authoritative reference for the toolbox — file formats, the parameter spreadsheet, radar software, and processing steps. 
+These pages will help you get connected and run some of the most common scripts we use in our group from machines here at Rice, and prototype locally.
 [`docs/reference/opr-wiki-map.md`](docs/reference/opr-wiki-map.md) is an annotated index into the upstream wiki.
 
 ## Contents
@@ -43,18 +43,14 @@ docs/
 
 ## Contributing
 
-Corrections welcome, especially failure modes missing from
+Corrections are welcome, the wiki the OPR toolbox and these tutorials are all constantly evolving documents
 [troubleshooting](docs/reference/troubleshooting.md).
 
 Anything that turns out to be generally useful rather than remote-specific
-belongs **upstream** in the OPR wiki rather than here — send it to
-`opr@openpolarradar.org`. Keeping that line clear is what stops this becoming a
-2 MB fork that drifts out of date.
-
-When adding a page, add it to the `nav:` block in `mkdocs.yml` — `make check`
+can be checked with Andrew before suggesting to John. When adding a page, add it to the `nav:` block in `mkdocs.yml` — `make check`
 will fail on an orphan, but only after you have already written it.
 
 ## Getting help
-
+- **Rice radar processing support** - `ah301@rice.edu` 
 - **OPR support** — `opr@openpolarradar.org`
 - **Accounts** — `paden@ku.edu`
