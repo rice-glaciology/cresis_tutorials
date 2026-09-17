@@ -25,7 +25,7 @@ sar.m                        array.m                    tomo.run_collate    slic
     `workshop_swath_tomo_collate.m`, `workshop_swath_slice_browser.m`,
     `workshop_swath_DEM.m`) each copy their inputs from an already-completed
     source, precisely because these stages take a long time. You can start at
-    the slice browser.
+    the slice browser if you want to practice picking.
 
 ## Stage 1 — Array processing
 
