@@ -1,14 +1,10 @@
 # Cross-track picking for multi-element swath data
 
-With a multi-element array you are no longer picking a single trace beneath the aircraft or sled. 
-Array processing turns each range line into a **cross-track image** — energy resolved as a function of direction of arrival — and the layer you want is a across track and along track surface, not a line.
+With a multi-element array we can process each range line and build a **cross-track image** resolving energy as a function of direction of arrival.
 
-!!! info "Different picker"
-    2D echograms use `imb.picker`. 3D imagery uses **`imb.slice_browser`**, and
-    the two are not yet integrated. Only beam-forming / 3D volume products
-    (e.g. `CSARP_music`) are supported for surface tracking.
 
 ## The chain
+The processing steps can be broken up into five steps that are descired on the cresis wiki.
 
 ```
 SAR processing            →  array processing        →  collation        →  picking      →  DEM
@@ -16,7 +12,6 @@ sar.m                        array.m                    tomo.run_collate    slic
                              CSARP_music                 surfdata files
 ```
 
-Four stages, each with an example runner in the toolbox:
 
 | Stage | Script | Produces |
 |---|---|---|
