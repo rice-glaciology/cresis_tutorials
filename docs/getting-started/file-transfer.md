@@ -1,11 +1,10 @@
-# Moving data in and out
+# Moving data on and off of the CReSIS server
 
-Remote work means bandwidth is a real constraint. A quad-pol frame is about
-400 MB; a season is not something you casually copy. The general rule is
+A lot of the data we work with is really large. A 20km quad-pol frame is about 400 MB; a season is not something you casually copy. The general rule is
 **move computation to the data, not data to the computation** — and when you do
 move something, move the smallest useful thing.
 
-## Public data: just download it
+## Public data
 
 Many processed products are public and need no credentials at all:
 
@@ -24,7 +23,7 @@ at 100 MB a file on a bad connection.
 For pulling a whole quad-pol frame in the server's directory layout, see
 [`fetch_frame.sh`](../doing-science/prototyping-loop.md#get-a-frame).
 
-## rsync: the default for everything else
+## rsync
 
 Once you have [SSH keys and a `cresis` host alias](ssh-and-tmux.md#a-reusable-ssh-config):
 
@@ -36,12 +35,12 @@ rsync -avz --progress ./local_dir/ cresis:/kucresis/scratch/<username>/dest/
 rsync -avz --progress cresis:/kucresis/scratch/<username>/figs/ ./figs/
 ```
 
-Useful flags:
+Some useful flags
 
-| Flag | Why |
+| Flag | Description |
 |---|---|
-| `-z` | Compress in transit. Big win on `.mat` and text, little on already-compressed data. |
-| `--progress` | You will want it on anything over a few hundred MB. |
+| `-z` | Compress in transit. Big win on `.mat` and text --doesn't help if the data are already-compressed. |
+| `--progress` | Progress bar that feeds back with progresive evaluation of download. |
 | `--partial` | Keep partial transfers so an interrupted run resumes. |
 | `--dry-run` | Always, the first time you write a `--delete` command. |
 | `--include`/`--exclude` | Pull only what you need — see below. |
@@ -49,7 +48,7 @@ Useful flags:
 !!! danger "`--delete` deletes"
     `rsync --delete` makes the destination match the source, removing anything
     else. On a shared filesystem with `umask 002` you have permission to delete
-    other people's files. Run it with `--dry-run` first, every time.
+    other people's local files at Rice (really important for download to shared machine in our lab).
 
 ### Pull only the small things
 
