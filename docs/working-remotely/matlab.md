@@ -85,7 +85,7 @@ Two options, and the choice matters more remotely than locally:
   laptop. Fine for a quick `imagesc`. **Uncompressed**, so genuinely painful for
   anything interactive.
 - **ThinLinc** — compressed, responsive. Use it for `imb.picker`, the
-  [slice browser](../doing-science/swath-cross-track-picking.md), and any
+  [slice browser](../science/swath-cross-track-picking.md), and any
   figure you intend to click on.
 
 For batch work, skip the display entirely and write files:
@@ -121,7 +121,7 @@ find toolbox usage that was committed accidentally, email
 ## Without a license
 
 For local prototyping you do not need the server at all — see
-[prototype locally, scale remotely](../doing-science/prototyping-loop.md) for
+[prototype locally, scale remotely](../science/prototyping-loop.md) for
 browser-based MATLAB in Docker and the Octave route.
 
 Note also that once `cluster_job.m` is compiled, the **compiled code runs

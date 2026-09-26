@@ -55,7 +55,7 @@ Reach for these when a `.mat` file has a field you do not recognise.
 
 ## 3D and multi-element
 
-See [cross-track picking](../doing-science/swath-cross-track-picking.md) for the
+See [cross-track picking](../science/swath-cross-track-picking.md) for the
 run order; these are the references.
 
 | Page | Description |

@@ -57,16 +57,26 @@ nav:
       - Running the cluster: working-remotely/cluster.md
       - Storage and file paths: working-remotely/storage-and-paths.md
       - Claude Code: working-remotely/claude-code.md
-  - Doing science:
-      - Finding data: doing-science/finding-data.md
-      - Prototype locally, scale remotely: doing-science/prototyping-loop.md
-      - Fabric from quad-pol: doing-science/fabric-polarimetry.md
-      - Across-track energy, start to finish: doing-science/swath-across-track-energy.md
-      - Cross-track swath picking: doing-science/swath-cross-track-picking.md
+  - Science:
+      - Finding data: science/finding-data.md
+      - Prototype locally, scale remotely: science/prototyping-loop.md
+      - Fabric from quad-pol: science/fabric-polarimetry.md
+      - Across-track energy, start to finish: science/swath-across-track-energy.md
+      - Cross-track swath picking: science/swath-cross-track-picking.md
   - Reference:
       - What the data look like: reference/data-files.md
       - Troubleshooting: reference/troubleshooting.md
       - Map into the OPR wiki: reference/opr-wiki-map.md
+
+plugins:
+  - search
+  - redirects:
+      redirect_maps:
+        doing-science/finding-data.md: science/finding-data.md
+        doing-science/prototyping-loop.md: science/prototyping-loop.md
+        doing-science/fabric-polarimetry.md: science/fabric-polarimetry.md
+        doing-science/swath-across-track-energy.md: science/swath-across-track-energy.md
+        doing-science/swath-cross-track-picking.md: science/swath-cross-track-picking.md
 
 markdown_extensions:
   - admonition

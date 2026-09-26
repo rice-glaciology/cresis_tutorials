@@ -27,10 +27,11 @@ docs/
     cluster.md                                Slurm, chains, surviving overnight failures
     storage-and-paths.md                      gRadar, opr_filename_*, caches
     claude-code.md                            AI tooling in your home directory
-  doing-science/
+  science/
     finding-data.md                           geoportal, OPS search, data portal
     prototyping-loop.md                       local → server, same layout
     fabric-polarimetry.md                     quad-pol fabric chain and its scripts
+    swath-across-track-energy.md              preprocessing order for a new swath segment
     swath-cross-track-picking.md              3D images and the slice browser
   reference/
     data-files.md                             path anatomy, radar directories,

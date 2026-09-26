@@ -103,7 +103,7 @@ The rest: `opr_filename_data` (raw — prefer `get_segment_file_list.m`),
 `opr_filename_opr_tmp` (shared temp).
 
 This is the mechanism that makes
-[local prototyping](../doing-science/prototyping-loop.md) work: change the roots
+[local prototyping](../science/prototyping-loop.md) work: change the roots
 in your `gRadar` profile, and the same script addresses your laptop or the
 server.
 
@@ -148,7 +148,7 @@ Never truncate a script a running job depends on.
 
 Intermediate caches are often the difference between iterating in an afternoon
 and iterating over a week. In the
-[fabric chain](../doing-science/fabric-polarimetry.md), coregistration caches
+[fabric chain](../science/fabric-polarimetry.md), coregistration caches
 run to roughly 0.7 GB a frame and take inversion reruns down to about twelve
 minutes.
 

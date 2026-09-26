@@ -2,7 +2,7 @@
 
 ThinLinc gives you a full Linux desktop in a window on your own machine. It is
 the right tool for `imb.picker`, the
-[slice browser](../doing-science/swath-cross-track-picking.md), and anything
+[slice browser](../science/swath-cross-track-picking.md), and anything
 else where you need to see and click on echograms.
 
 It compresses graphics properly, which X11 forwarding over SSH does not, so

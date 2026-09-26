@@ -33,10 +33,10 @@ After that, [VS Code Remote-SSH](getting-started/vscode-remote-ssh.md) and
 
 I've also included two working examples developed with Victoria Villagomez at Rice University.
 
-- **[Fabric from quad-pol accumulation radar](doing-science/fabric-polarimetry.md)**
+- **[Fabric from quad-pol accumulation radar](science/fabric-polarimetry.md)**
   — the polarimetric traveltime chain, stage by stage, and the scripts that run
   it.
-- **[Cross-track picking for multi-element swath data](doing-science/swath-cross-track-picking.md)**
+- **[Cross-track picking for multi-element swath data](science/swath-cross-track-picking.md)**
   — 3D image generation, collation, and picking surfaces in the slice browser.
 
 

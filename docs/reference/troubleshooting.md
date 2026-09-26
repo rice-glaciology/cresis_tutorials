@@ -70,7 +70,7 @@ where you hit them.
 
 ## Swath preprocessing
 
-These come from [across-track energy, start to finish](../doing-science/swath-across-track-energy.md).
+These come from [across-track energy, start to finish](../science/swath-across-track-energy.md).
 
 | Symptom | Fix |
 |---|---|

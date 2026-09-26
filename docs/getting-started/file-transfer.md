@@ -21,7 +21,7 @@ curl -sS --fail -O -C - \
 at 100 MB a file on a bad connection.
 
 For pulling a whole quad-pol frame in the server's directory layout, see
-[`fetch_frame.sh`](../doing-science/prototyping-loop.md#get-a-frame).
+[`fetch_frame.sh`](../science/prototyping-loop.md#get-a-frame).
 
 ## rsync
 

@@ -42,10 +42,10 @@ These include the "ku/kaband" radar altimeter, the "snow" radar, the "accumulati
 This list is sorted according to decreasing depth penetration.  `rds` reaches the bed, `accum`
 images the layered upper ice and the bed down to depths near 1500-2400m dependeing on the transmit power, `snow` resolves seasonal snow layering, and the altimeters barely transmits through the surface, but can often image the base of the sea-ice column.
 
-When you see `accum` in a path you are looking at the UHF system — for several ground based seasons, these data transmit and receive pulses polarized in horizontal and vertical antenna orientations makeing it possible to use these methods to understand [ice fabric](../doing-science/fabric-polarimetry.md).
+When you see `accum` in a path you are looking at the UHF system — for several ground based seasons, these data transmit and receive pulses polarized in horizontal and vertical antenna orientations makeing it possible to use these methods to understand [ice fabric](../science/fabric-polarimetry.md).
 
 "Multichannel" in MCoRDS is the important for doing any 3D tomography where using multiple antenna elements we can resolve the *direction* an echo came from, not just its delay. 
-That is what makes [cross-track swath processing](../doing-science/swath-cross-track-picking.md)
+That is what makes [cross-track swath processing](../science/swath-cross-track-picking.md)
 possible, and why some products carry an extra dimension.
 
 Each family also has a characteristic transmit pulse characterized by `radar_type` in the toolbox: the snow and altimeter systems are **FMCW
@@ -93,7 +93,7 @@ Practically, this means:
 
 ## What to read next
 
-- **[Finding data](../doing-science/finding-data.md)** — the vocabulary of
+- **[Finding data](../science/finding-data.md)** — the vocabulary of
   seasons, segments and frames, and how to search geographically.
 - **[Working with data](../reference/data-files.md)** — the directory
   tree and what is actually inside an echogram file.

@@ -245,7 +245,7 @@ radar's reference point, and the file stores the GPS source, time offset and
 lever arm so the geometry can be reconstructed.
 
 For 3D imagery, picks live in **surfdata** files instead — see
-[cross-track picking](../doing-science/swath-cross-track-picking.md).
+[cross-track picking](../science/swath-cross-track-picking.md).
 
 ## Building paths in code
 
