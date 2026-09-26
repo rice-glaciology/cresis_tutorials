@@ -61,6 +61,7 @@ nav:
       - Finding data: doing-science/finding-data.md
       - Prototype locally, scale remotely: doing-science/prototyping-loop.md
       - Fabric from quad-pol: doing-science/fabric-polarimetry.md
+      - Across-track energy, start to finish: doing-science/swath-across-track-energy.md
       - Cross-track swath picking: doing-science/swath-cross-track-picking.md
   - Reference:
       - What the data look like: reference/data-files.md

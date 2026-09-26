@@ -68,6 +68,22 @@ where you hit them.
 | Large transfer interrupted | `rsync` resumes; `curl -C -` resumes a single file. |
 | Permission denied writing to a shared directory | Check `umask 002` is set — group-writable is the convention on these systems. |
 
+## Swath preprocessing
+
+These come from [across-track energy, start to finish](../doing-science/swath-across-track-energy.md).
+
+| Symptom | Fix |
+|---|---|
+| `collate_equal` dies with `Cannot set WindowStyle to 'docked'` | Remove `'comp_image'` from `collate_equal.debug_plots` in batch runs. |
+| `collate_equal` never returns under `-batch` | `'visible'` in `debug_plots` stops at `keyboard`. Remove it. |
+| `collate_equal` has run for hours after "Saving ...phase_img..." | The `'final'` block is drawing its phase-filtered figure. Drop `'final'` and print the table from the Equal file. |
+| Equalization changes of tens of dB or more than 90° | The surface is inside the transmit pulse (range < c·Tpd/2), or `rlines` includes turns and rough terrain. |
+| The second waveform's reference element became exactly 0 | If it shares an array image with the first, it was equalized in its own image list. Put them in one `img_lists` entry. |
+| Every channel of a waveform moved by the same 80° or so | The list shifted by one constant. That is harmless for its own image. Judge the changes net of it. |
+| `Index exceeds` or `size of the left side is N-by-1 and ... 1-by-N+1` in `max_filt1` | An OPR bug, fixed upstream in Feb 2026 (commit 22283d85). Update OPR, or take that one file. |
+| A Slurm job hit its wall time after its tasks finished | Check `out/out_N.mat`. OPR marks finished tasks done, so no rerun is needed. |
+| `error_N.txt` says `syntax error in expression` | It comes from the memory sampler in `cluster_job.sh`. It is harmless if `out_N.mat` exists. |
+
 ## Getting help
 
 - **OPR support** — `opr@openpolarradar.org`

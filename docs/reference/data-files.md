@@ -38,7 +38,7 @@ processing output directory and nothing more.
 
 The top level of the archive splits by **frequency family**, because frequency
 is what decides how deep an instrument sees — the reasoning is in
-[where these data come from](../background/history.md#the-instruments-and-why-frequency-decides-everything).
+[where these data come from](../background/history.md#instrument-naming-conventions).
 On the [public data portal](https://data.cresis.ku.edu/data/) and on the
 servers, those are:
 

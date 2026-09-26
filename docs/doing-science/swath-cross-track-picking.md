@@ -12,6 +12,10 @@ sar.m                        array.m                    tomo.run_collate    slic
                              CSARP_music                 surfdata files
 ```
 
+!!! note "Before SAR"
+    For a segment nobody has processed, coherent-noise removal and receiver
+    equalization come first, and they decide whether the angles mean
+    anything. See [across-track energy, start to finish](swath-across-track-energy.md).
 
 | Stage | Script | Produces |
 |---|---|---|
