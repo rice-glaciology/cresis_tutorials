@@ -1,8 +1,7 @@
 # Moving data on and off of the CReSIS server
 
-A lot of the data we work with is really large. A 20km quad-pol frame is about 400 MB; a season is not something you casually copy. The general rule is
-**move computation to the data, not data to the computation** — and when you do
-move something, move the smallest useful thing.
+A lot of the data we work with is really large (a segment of quad-pol data is about 400 MB) a season is not easily copied. The general rule is
+**move computation to the servers and work remotely on the data**. Only move the smallest most useful data.
 
 ## Public data
 
@@ -17,10 +16,9 @@ curl -sS --fail -O -C - \
   "https://data.cresis.ku.edu/data/accum/2024_Antarctica_Ground2/CSARP_standard_HH/20250108_02/Data_20250108_02_009.mat"
 ```
 
-`-C -` resumes an interrupted download rather than starting over, which matters
-at 100 MB a file on a bad connection.
+`-C -` resumes an interrupted download.
 
-For pulling a whole quad-pol frame in the server's directory layout, see
+For pulling a whole quad-pol segment/frame in the server's directory layout, see
 [`fetch_frame.sh`](../science/prototyping-loop.md#get-a-frame).
 
 ## rsync
@@ -39,11 +37,11 @@ Some useful flags
 
 | Flag | Description |
 |---|---|
-| `-z` | Compress in transit. Big win on `.mat` and text --doesn't help if the data are already-compressed. |
+| `-z` | Compresses the file as it's downloaded. |
 | `--progress` | Progress bar that feeds back with progresive evaluation of download. |
 | `--partial` | Keep partial transfers so an interrupted run resumes. |
-| `--dry-run` | Always, the first time you write a `--delete` command. |
-| `--include`/`--exclude` | Pull only what you need — see below. |
+| `--dry-run` | best practice for the first time you write a `--delete` command. |
+| `--include`/`--exclude` | Helps pull only what you need. |
 
 !!! danger "`--delete` deletes"
     `rsync --delete` makes the destination match the source, removing anything
@@ -60,12 +58,10 @@ rsync -avz --include='*/' --include='*.png' --exclude='*' \
   cresis:/kucresis/scratch/<username>/proj/ ./review/
 ```
 
-Reviewing a hundred frames as PNGs pulled down in one go is far faster than
-paging through them over a remote display. See
-[MATLAB from a distance](../working-remotely/matlab.md#plots) for writing
-figures headlessly.
+Reviewing a hundred frames as PNGs pulled down in one go is much faster than paging through them over a remote display. 
+See [MATLAB from a distance](../working-remotely/matlab.md#plots) for writing figures headlessly.
 
-## scp, for one file
+## scp,
 
 ```bash
 scp cresis:/kucresis/scratch/<username>/figs/frame_009.png .
@@ -76,11 +72,10 @@ resumes, and it will not re-copy what is already there.
 
 ## FileZilla
 
-A GUI client, and what the OPR setup instructions recommend for people who
-would rather not use the command line. It works on Windows, macOS and Linux.
-
-Point it at your login node — host `lps3.cresis.ku.edu`, your username and
-password. Use **SFTP**, not FTP.
+A GUI client, and what the OPR setup instructions recommend for people who would rather not use the command line. 
+It works on Windows, macOS and Linux. 
+Point it at your login node — host `lps3.cresis.ku.edu`, your username and password. 
+Use **SFTP**, not FTP.
 
 ## Big transfers
 
@@ -103,7 +98,5 @@ Do not `rsync` your source tree. Use git:
 git pull
 ```
 
-`ForwardAgent yes` means your local SSH key authenticates the pull, so you never
-copy a private key onto a shared machine. See
-[storage and file paths](../working-remotely/storage-and-paths.md#deploy-edits-atomically)
-for deploying single-file edits atomically while jobs are running.
+`ForwardAgent yes` means your local SSH key authenticates the pull, so you don't copy a private key onto a shared machine. 
+See [storage and file paths](../working-remotely/storage-and-paths.md#deploy-edits-atomically) for deploying single-file edits atomically while jobs are running.
