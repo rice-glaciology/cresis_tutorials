@@ -36,8 +36,8 @@ I've also included two working examples developed with Victoria Villagomez at Ri
 - **[Fabric from quad-pol accumulation radar](science/fabric-polarimetry.md)**
   — the polarimetric traveltime chain, stage by stage, and the scripts that run
   it.
-  Its companion, **[eigenvalues and the horizontal fabric](science/fabric-eigenvalues.md)**,
-  introduces the linear algebra behind $\Delta\lambda$ and the fabric axis.
+  Its companion **[fabric math primer](science/fabric-linear-algebra.md)** builds the
+  linear algebra behind $\Delta\lambda$ and the fabric axis from scratch, in three pages.
 - **[Cross-track picking for multi-element swath data](science/swath-cross-track-picking.md)**
   — 3D image generation, collation, and picking surfaces in the slice browser.
 

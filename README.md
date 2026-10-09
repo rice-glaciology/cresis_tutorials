@@ -30,8 +30,11 @@ docs/
   science/
     finding-data.md                           geoportal, OPS search, data portal
     prototyping-loop.md                       local → server, same layout
-    fabric-eigenvalues.md                     eigenvalues, eigenvectors and the
-                                              horizontal fabric matrix
+    fabric-linear-algebra.md                  primer 1: vectors, matrices and
+                                              eigenvalues from scratch
+    fabric-eigenvalues.md                     primer 2: the horizontal fabric matrix
+    fabric-inversion-eigenvalues.md           primer 3: what the inversion can resolve
+    img/fabric-math/                          primer figures (tools/fabric_math_figures.py)
     fabric-polarimetry.md                     quad-pol fabric chain and its scripts
     swath-across-track-energy.md              preprocessing order for a new swath segment
     swath-cross-track-picking.md              3D images and the slice browser

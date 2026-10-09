@@ -60,7 +60,10 @@ nav:
   - Science:
       - Finding data: science/finding-data.md
       - Prototype locally, scale remotely: science/prototyping-loop.md
-      - Eigenvalues and the horizontal fabric: science/fabric-eigenvalues.md
+      - Fabric math primer:
+          - 1. Vectors, matrices, eigenvalues: science/fabric-linear-algebra.md
+          - 2. The horizontal fabric matrix: science/fabric-eigenvalues.md
+          - 3. What the inversion can resolve: science/fabric-inversion-eigenvalues.md
       - Fabric from quad-pol: science/fabric-polarimetry.md
       - Across-track energy, start to finish: science/swath-across-track-energy.md
       - Cross-track swath picking: science/swath-cross-track-picking.md
