@@ -30,6 +30,8 @@ docs/
   science/
     finding-data.md                           geoportal, OPS search, data portal
     prototyping-loop.md                       local → server, same layout
+    fabric-eigenvalues.md                     eigenvalues, eigenvectors and the
+                                              horizontal fabric matrix
     fabric-polarimetry.md                     quad-pol fabric chain and its scripts
     swath-across-track-energy.md              preprocessing order for a new swath segment
     swath-cross-track-picking.md              3D images and the slice browser

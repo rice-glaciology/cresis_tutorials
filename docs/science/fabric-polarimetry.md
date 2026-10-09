@@ -17,6 +17,10 @@ $$\Delta\lambda = \lambda_x - \lambda_y$$
 
 The chain measures $\Delta\tau(\text{twtt}, x)$ and inverts it for $\Delta\lambda$ over depth intervals.
 
+$\lambda_x$ and $\lambda_y$ are the eigenvalues of the horizontal block of the fabric orientation tensor.
+If eigenvalues are new to you, or you want to know why the radar sees only their difference, read
+[eigenvalues and the horizontal fabric](fabric-eigenvalues.md) first.
+
 For this example, we'll be focused on a season that has been processed with **separate per-polarization products**. 
 For `2024_Antarctica_Ground2` that is:
 

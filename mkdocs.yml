@@ -60,6 +60,7 @@ nav:
   - Science:
       - Finding data: science/finding-data.md
       - Prototype locally, scale remotely: science/prototyping-loop.md
+      - Eigenvalues and the horizontal fabric: science/fabric-eigenvalues.md
       - Fabric from quad-pol: science/fabric-polarimetry.md
       - Across-track energy, start to finish: science/swath-across-track-energy.md
       - Cross-track swath picking: science/swath-cross-track-picking.md
