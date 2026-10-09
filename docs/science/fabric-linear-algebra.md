@@ -1,68 +1,44 @@
 # Vectors, matrices and eigenvalues from scratch
 
-This is the first of three pages that build up the mathematics behind the
-[fabric inversion](fabric-polarimetry.md). It assumes **no linear algebra at
-all**: if you can multiply, add, and use a calculator for $\cos$ and
-$\sqrt{\ }$, you have everything you need.
+This is the first of three pages that build up the mathematics that we'll use to infer ice fabric orientation and strength.
+It assumes **no background in linear algebra**.
 
-| page | what it does |
-|---|---|
-| **1. this page** | vectors, matrices, and what an eigenvalue is |
-| 2. [The horizontal fabric matrix](fabric-eigenvalues.md) | uses page 1 to describe ice fabric, and shows what the radar measures |
-| 3. [What the inversion can resolve](fabric-inversion-eigenvalues.md) | uses page 1 again on the equations the code solves |
+Every new concept comes with a small example in Python and MATLAB so you can build familiarity with how matrix math maps to functions in coding langauges we use to interpret radar data.
 
-Every idea comes with a small example worked by hand, then the same example in
-Python and MATLAB so you can check it. Each section ends with a short
-**why this matters for fabric** note, so you can see where it is going.
+## 1. Vectors
 
-## 1. Vectors: arrows written as numbers
-
-On a map, "2 km east and 1 km north" describes an arrow. We write it as a
-pair of numbers in brackets,
+On a map, "2 km east and 1 km north" describes a vector. We can write this vector as a pair of numbers in brackets,
 
 $$\mathbf{v} = (2,\ 1)$$
 
-and call it a **vector**. The first number is the **x-component** (east) and
-the second is the **y-component** (north). Bold letters such as
-$\mathbf{v}$ mean "this is a vector, not a single number".
+The first number is the **x-component** (east) and the second is the **y-component** (north). 
 
 ![A vector (2, 1) drawn as an arrow with its components, and a c-axis drawn
 as two opposite arrows](img/fabric-math/vector.png)
 
-**Length.** The arrow is the long side of a right triangle, so by
-Pythagoras its length is
+**Length.** The arrow is the long side of a right triangle, so by Pythagoras its length is
 
 $$|\mathbf{v}| = \sqrt{2^2 + 1^2} = \sqrt5 \approx 2.24$$
 
-**Unit vectors.** A vector of length 1 only carries a *direction*. A unit
-vector pointing at an angle $\psi$ from east is
+**Unit vectors.** A vector of length 1 only carries a *direction*. A unit vector pointing at an angle $\psi$ from east is
 
 $$\mathbf{u} = (\cos\psi,\ \sin\psi)$$
 
-You can check the length: $\cos^2\psi + \sin^2\psi = 1$. We will use unit vectors
-for two things: the direction a radar **antenna** points, and the direction
-of an ice crystal's **c-axis**.
+You can check the length: $\cos^2\psi + \sin^2\psi = 1$. 
+We use unit vectors for two things: to describe the direction the radar **antenna** points, and the direction of an ice crystal's **c-axis**.
 
-!!! info "Why this matters for fabric"
-    Every ice crystal has a symmetry axis called its **c-axis**, and we describe it
-    with a unit vector $\mathbf{c}$. The right panel above shows a
-    complication that will matter later: $\mathbf{c}$ and $-\mathbf{c}$
-    are the *same* crystal. An axis is a line through the crystal, not an arrow with
-    a head.
+## 2. The dot product
 
-## 2. The dot product: how much of one arrow lies along another
-
-Multiply the two vectors component by component and add:
+If we multiply the two vectors component by component and add them:
 
 $$\mathbf{a}\cdot\mathbf{b} = a_x b_x + a_y b_y$$
 
-This single number is the **dot product**. When both are unit vectors, it is the
-cosine of the angle between them:
+This single number is called the **dot product**. 
+When both are unit vectors, this value is the cosine of the angle between them:
 
 $$\mathbf{a}\cdot\mathbf{b} = \cos(\text{angle between } \mathbf{a} \text{ and } \mathbf{b})$$
 
-It is 1 when they are parallel, 0 when they are perpendicular, and $-1$
-when they point opposite ways.
+The dot product of two parallel unit verctors is 1 and 0 when they are perpendicular, and $-1$ when they point opposite directions.
 
 ![A field vector projected onto an antenna direction](img/fabric-math/projection.png)
 
@@ -83,24 +59,22 @@ Geometrically, this is the **projection** of $\mathbf{E}$ onto $\mathbf{u}$.
 
 !!! info "Why this matters for fabric"
     An antenna records only the part of the field that lies along it, so
-    every polarimetric measurement is a dot product. Rotating the antennas
-    changes which part they record.
+    every polarimetric measurement is a dot product. To sample more components of a field we don't know apriori, we can rotate the antennas
+    and change which part/component of the field they record.
 
 ## 3. Matrices: machines that turn vectors into vectors
 
-A **matrix** is a grid of numbers. A $2\times2$ matrix has two rows and
+A **matrix** is a great mathematical tool to organize multiple dimensions of numbers. A $2\times2$ matrix has two rows and
 two columns:
 
 $$
 A = \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}
 $$
 
-We name the entries by row, then column: $A_{12}$ is row 1, column 2, which
-is 1 here.
+We name the entries by row, then column: $A_{12}$ is row 1, column 2, which is 1 here.
 
-A matrix is useful because it **acts on a vector** and produces a new vector.
-The rule is this: each entry of the output is the dot product of one *row* of
-the matrix with the input vector.
+Matrices are useful because they **act on a vector** and produce a new vector.
+The rule is this: each entry of the output is the dot product of one *row* of the matrix with the input vector.
 
 $$
 A\mathbf{v} =
@@ -112,8 +86,9 @@ A\mathbf{v} =
 \begin{bmatrix} 2 \\ 1 \end{bmatrix}
 $$
 
-(Vectors are written as columns when a matrix acts on them. It is the same
-pair of numbers.) Try a few more with the same $A$:
+Vectors are written as columns when a matrix acts on them. 
+It is the same pair of numbers. 
+We can try more matrix operations with the same $A$:
 
 | input $\mathbf{v}$ | output $A\mathbf{v}$ | what happened |
 |---|---|---|
@@ -122,9 +97,9 @@ pair of numbers.) Try a few more with the same $A$:
 | $(1,\ 1)$ | $(3,\ 3)$ | same direction, 3 times longer |
 | $(1,\ -1)$ | $(1,\ -1)$ | unchanged |
 
-Look at the last two rows. Most inputs come out pointing a new way, but
-$(1, 1)$ and $(1, -1)$ come out pointing exactly the way they went in. Keep
-that in mind; it is the whole idea of section 6.
+Look at the last two rows. 
+Most inputs come out pointing a new direction, but $(1, 1)$ and $(1, -1)$ come out pointing exactly the way they went in.
+We can define matrices in matlab and python using bracket notation.
 
 === "Python"
 
