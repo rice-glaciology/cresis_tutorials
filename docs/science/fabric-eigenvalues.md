@@ -78,7 +78,7 @@ A_h = \begin{bmatrix} 0.5 & 0.217 \\ 0.217 & 0.5 \end{bmatrix}
 $$
 
 This is the same shape as the page 1 example
-$\begin{bmatrix} 2 & 1 \\ 1 & 2\end{bmatrix}$: equal diagonal entries, so the
+$$\begin{bmatrix} 2 & 1 \\ 1 & 2\end{bmatrix}$: equal diagonal entries, so the
 eigenvectors sit at 45° and 135°. The recipe (page 1, §7) gives
 
 $$
@@ -137,8 +137,9 @@ vertical one.
 
 A ground-based radar sends its waves nearly straight down. The electric field
 of a wave always points *across* its direction of travel, so for a downgoing wave
-the field is **horizontal**. The radar therefore only sees how the matrix acts
-on horizontal vectors.
+the field is **horizontal**. Radar waves oscillate strictly sideways (horizontally 
+in the $x$-$y$ plane) as they propagate downward along $z$, The radar therefore 
+only sees how the matrix acts on horizontal vectors.
 
 The method assumes one eigenvector of $\mathbf{a}^{(2)}$ is vertical, which
 is reasonable away from steep bed topography. The zeros in the matrix below
@@ -222,7 +223,7 @@ A_h = \underbrace{\frac{h}{2}\,I}_{\text{isotropic part}}
 $$
 
 (Multiply out the four crystals to check: $h = 1$, $\Delta\lambda = 0.43$
-and $\theta = 45°$ give back $\begin{bmatrix} 0.5 & 0.217 \\ 0.217 & 0.5\end{bmatrix}$.)
+and $\theta = 45°$ give back $$\begin{bmatrix} 0.5 & 0.217 \\ 0.217 & 0.5\end{bmatrix}$.)
 
 - The **isotropic part** looks the same in every horizontal direction. A
   radar that compares two polarizations subtracts it away, so it cannot see it.
@@ -338,7 +339,8 @@ What this means for a wave: a wave whose field points along an eigenvector of
 $\boldsymbol\varepsilon$ travels down the column without its field direction
 changing. These two special polarizations are the column's
 **eigenmodes**. The one along the $\lambda_x$ eigenvector has the larger
-permittivity, so it is the **slow** wave. After travelling down to a reflector and back, the slow wave
+permittivity, so it is the **slow** wave. It is a measure of anisotropic strength 
+and the thickness of a layer. After travelling down to a reflector and back, the slow wave
 arrives later than the fast one, and the delay grows with depth:
 
 $$
