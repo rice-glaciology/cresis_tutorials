@@ -80,9 +80,13 @@ $$
 A\mathbf{v} =
 \begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}
 \begin{bmatrix} 1 \\ 0 \end{bmatrix}
+$$
 =
+$$
 \begin{bmatrix} 2\times1 + 1\times0 \\ 1\times1 + 2\times0 \end{bmatrix}
+$$
 =
+$$
 \begin{bmatrix} 2 \\ 1 \end{bmatrix}
 $$
 
@@ -146,8 +150,8 @@ where east and north end up.
 moves to position 21. For a rotation, the transpose turns the other way:
 $R(\psi)^T = R(-\psi)$.
 
-**A symmetric matrix** equals its own transpose, so $A_{12} = A_{21}$.
-$\begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}$ is symmetric. **Every matrix
+**A symmetric matrix** equals its own transpose, so $A_{12}=A_{21}$. 
+$\left[\begin{smallmatrix} 2 & 1 \\ 1 & 2 \end{smallmatrix}\right]$ is symmetric. **Every matrix
 in the fabric problem is symmetric**, which is lucky, as section 8 explains.
 
 ## 5. Doing one machine after another
@@ -287,17 +291,17 @@ For a **symmetric** matrix, three things are guaranteed:
 3. **The matrix is "rotate, stretch, rotate back":**
 
     $$
-    \boxed{A = R\,\Lambda\,R^T}
+    \bbox[2px, border: 1px solid black]{A = R\,\Lambda\,R^T}
     $$
 
     where $\Lambda$ (capital lambda) is the diagonal matrix of eigenvalues
     and the columns of $R$ are the unit eigenvectors.
 
-Read point 3 right to left, as in section 5. $R^T$ turns the eigenvectors onto
-the x and y axes, $\Lambda$ stretches each axis by its eigenvalue, and $R$
-turns everything back. For our example, $R = R(45°)$ and
-$\Lambda = \begin{bmatrix} 3 & 0 \\ 0 & 1 \end{bmatrix}$; multiplying out
-$R\Lambda R^T$ gives back exactly $\begin{bmatrix} 2 & 1 \\ 1 & 2\end{bmatrix}$.
+Read point 3 right to left, as in section 5. $R^T$ turns the eigenvectors onto 
+the $x$ and $y$ axes, $\Lambda$ stretches each axis by its eigenvalue, and $R$ 
+turns everything back. For our example, $R = R(45^\circ)$ and 
+$\Lambda = \begin{bmatrix} 3 & 0 \\ 0 & 1 \end{bmatrix}$; multiplying 
+out $R\Lambda R^T$ gives back exactly $\begin{bmatrix} 2 & 1 \\ 1 & 2 \end{bmatrix}$.
 
 Finding $R$ and $\Lambda$ is called **diagonalizing** the matrix. It changes
 the question "what does this grid of numbers do?" into "which two directions,
@@ -345,10 +349,9 @@ guarantee real eigenvalues and perpendicular eigenvectors:
       line, so compare directions modulo 180°, never as raw angles.
 
 ## Exercises
-
 ??? question "1. Eigenvalues of a diagonal matrix"
-    What are the eigenvalues and eigenvectors of
-    $\begin{bmatrix} 4 & 0 \\ 0 & 1 \end{bmatrix}$?
+    What are the eigenvalues and eigenvectors of 
+    $\begin{bmatrix} 4 & 0 \\\ 0 & 1 \end{bmatrix}$?
 
     **Answer.** 4 along $(1, 0)$ and 1 along $(0, 1)$. A diagonal matrix
     is already in its own frame, so nothing needs to be computed.
