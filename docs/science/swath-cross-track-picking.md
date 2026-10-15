@@ -13,9 +13,7 @@ sar.m                        array.m                    tomo.run_collate    slic
 ```
 
 !!! note "Before SAR"
-    For a segment nobody has processed, coherent-noise removal and receiver
-    equalization come first, and they decide whether the angles mean
-    anything. See [across-track energy, start to finish](swath-across-track-energy.md).
+    For a segment nobody has processed, we first have to run scripts that remove coherent-noise and equalize receiver channels. See [across-track energy, start to finish](swath-across-track-energy.md).
 
 | Stage | Script | Produces |
 |---|---|---|
