@@ -4,7 +4,7 @@ With a multi-element array we can process each range line and build a **cross-tr
 
 
 ## The chain
-The processing steps can be broken up into five steps that are descired on the cresis wiki.
+The processing steps can be broken up into five steps that are descirbed on the cresis wiki.
 
 ```
 SAR processing            →  array processing        →  collation        →  picking      →  DEM
