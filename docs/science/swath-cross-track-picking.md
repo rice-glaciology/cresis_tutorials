@@ -34,10 +34,10 @@ sar.m                        array.m                    tomo.run_collate    slic
 `run_array.m` drives `array.m` using the
 [array worksheet](https://gitlab.com/openpolarradar/opr/-/wikis/OPR-Toolbox-Guide#array-worksheet)
 of the parameter spreadsheet. For 3D imaging you want a beam-forming or
-subspace method — MUSIC (`CSARP_music`) is the usual choice — rather than the
-standard periodogram output.
+subspace method. MUSIC (`CSARP_music`) is a method we use a lot rather than the
+standard periodogram output, but there are other methods that are used to operate on the covariance matrix that characterizes the combined receive waveforms.
 
-This is heavy processing. Run it through Slurm, not on a login node; see
+These jobs take a long time, so run it through Slurm; see
 [running the cluster remotely](../working-remotely/cluster.md).
 
 ## Stage 2 — Collation
