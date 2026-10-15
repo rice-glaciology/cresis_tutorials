@@ -1,7 +1,8 @@
 # Across-track energy from a segment nobody has processed
 
-The [cross-track picking](swath-cross-track-picking.md) page starts at SAR.
-This page covers what has to happen **before** SAR, and what to check at
+The [cross-track picking](swath-cross-track-picking.md) page starts once
+the 3D images exist. This page covers what has to happen before them,
+starting before SAR, and what to check at
 each step, when you want to measure how much energy comes back from each
 direction across track. It is written from reprocessing multi-element P-3
 MCoRDS segments (2013, 2014 and 2019 Greenland) from raw data.
@@ -375,7 +376,7 @@ subtract it before any weighting.
 - [Receiver equalization](https://gitlab.com/openpolarradar/opr/-/wikis/Receiver-equalization): `collate_equal` fields, choosing `rlines`, applying Tsys
 - [Coherent Noise](https://gitlab.com/openpolarradar/opr/-/wikis/Coherent-Noise): the two-pass method and its plots
 - [Generating 3D Images](https://gitlab.com/openpolarradar/opr/-/wikis/Generating-3D-Images): `array` settings for 3D
-- [Cross-track swath picking](swath-cross-track-picking.md): SAR onward, and the slice browser
+- [Cross-track swath picking](swath-cross-track-picking.md): picking the bed across track in the slice browser
 - Paden et al. 2010, *J. Glaciol.*, MUSIC 3-D bed tomography. doi:10.3189/002214310791190811
 - Byers et al. 2012, *IEEE TIM* 61(5), the P-3 dipole array
 - Rodriguez-Morales et al. 2014, *IEEE TGRS*, the MCoRDS instruments. doi:10.1109/TGRS.2013.2266415
