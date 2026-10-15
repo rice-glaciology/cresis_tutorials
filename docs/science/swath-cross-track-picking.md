@@ -95,21 +95,22 @@ run TRW-S, inspect, add ground truth where it went wrong, run again.
 ### 1. Start
 
 ```matlab
-param = read_param_xls(opr_filename_param('rds_param_2014_Greenland_P3.xls'), '20140401_03');
+param = struct('radar_name','rds', ...
+  'season_name','2014_Greenland_P3', 'day_seg','20140401_03');
 frm = 39;
-out_type = 'music';          % image directory, CSARP_music
-surfdata_source = 'surf';    % surfdata directory, CSARP_surf
-sb_param.step_size = 5;      % slices moved by h, j, k, l
 imb.run_slice_browser;
 ```
+
+`imb.run_slice_browser` is a script, not a function. It reads these
+variables from your workspace, so you change what it opens by changing
+them and running it again. See
+[Choosing what to open](#choosing-what-to-open) for every setting and for
+working through a list of segments.
 
 Three windows open: the **slice**, the **surface** view (the selected
 surface's range bin as a map of along-track by cross-track), and the
 **echogram**. Moving the mouse in the slice window moves a black cross in
 the other two, so you always know where in the frame you are.
-
-Run `clear run_slice_browser_fn` before switching frames, or the script
-reuses the data it already loaded.
 
 ### 2. Switch out of zoom mode
 
@@ -223,6 +224,193 @@ Closing the slice window asks whether to save.
 
 Save often. A long run of picking lives only in memory until you do.
 
+## Choosing what to open
+
+### The settings
+
+`imb.run_slice_browser` builds two filenames from your workspace variables
+and opens them:
+
+```text
+image:     <out_path>/<radar>/<season_name>/CSARP_<out_type>/<day_seg>/Data_<day_seg>_<frm>.mat
+surfdata:  <out_path>/<radar>/<season_name>/CSARP_<surfdata_source>/<day_seg>/Data_<day_seg>_<frm>.mat
+```
+
+`<out_path>` comes from your startup (`gRadar.out_path`) and `<radar>` from
+the radar name (`rds` for the MCoRDS radars).
+
+| Variable | Default | What it selects |
+|---|---|---|
+| `param.radar_name` | required | Radar, e.g. `'rds'` |
+| `param.season_name` | required | Season, e.g. `'2014_Greenland_P3'` |
+| `param.day_seg` | required | Segment, e.g. `'20140401_03'` |
+| `frm` | required | Frame number within the segment |
+| `out_type` | `'music'` | Image directory, `CSARP_<out_type>`. Match the `out_path` you gave the array worksheet |
+| `out_type_img` | `0` | `0` opens the fused image `Data_...`. `N` opens waveform image `Data_img_0N_...` before fusing |
+| `surfdata_source` | `'surf'` | Surfdata directory, `CSARP_<surfdata_source>`. Your picks are saved here |
+| `sb_param.step_size` | `5` | Slices moved by `h`, `j`, `k`, `l` |
+| `sb_param.bounds_relative` | `[0 0 0 0]` | DOA bins to ignore at each edge of the swath, `[left right top bottom]` |
+| `sb_param.doa_method_flag` | `false` | `true` for DOA-method products, plotted against elevation angle. Apply and Options are not available in this mode |
+| `trws_param` | `[]` | Starting values for the TRW-S options: `ct_weight`, `at_weight`, `gt_range`, `max_loops`, `layer_bounds`, `er_ice`, `er_air` |
+
+`param` only needs those three fields, so a plain `struct` is enough. If
+you already load the parameter spreadsheet for other work,
+`param = read_param_xls(opr_filename_param('rds_param_2014_Greenland_P3.xlsx'), '20140401_03');`
+gives the same result.
+
+Variables you set stay in the workspace until you `clear` them. If you set
+`out_type_img = 2` to look at one waveform, set it back to `0` before you
+open the next frame.
+
+### Examples
+
+**Next frame in the same segment.** Change only the frame.
+
+```matlab
+frm = 40;
+imb.run_slice_browser;
+```
+
+**A different segment.** Change `day_seg`, and pick a frame that exists in
+it. [Finding data](finding-data.md) covers how to see which frames cover your
+area.
+
+```matlab
+param.day_seg = '20140415_05';
+frm = 3;
+imb.run_slice_browser;
+```
+
+**A different season.** Change `season_name`, and `radar_name` if needed.
+
+```matlab
+param = struct('radar_name','rds', ...
+  'season_name','2019_Greenland_P3', 'day_seg','20190417_01');
+frm = 12;
+imb.run_slice_browser;
+```
+
+**A different image product.** If you ran the array step a second time with
+another method and its own `out_path` (for example `music_mvdr`), point
+`out_type` at it. The surfdata stays the same.
+
+```matlab
+out_type = 'music_mvdr';     % opens CSARP_music_mvdr
+imb.run_slice_browser;
+```
+
+**One look direction on its own.** `out_type_img = 2` opens waveform 2's
+image before it was fused. Use it to check whether a feature only appears in
+one look direction, then go back to the fused image for picking.
+
+```matlab
+out_type_img = 2;
+imb.run_slice_browser;
+out_type_img = 0;            % back to the fused image
+```
+
+**Keep your picks separate.** Copy the collated surfdata to your own
+directory and point `surfdata_source` at it. The original stays untouched,
+and two people can pick the same frame without overwriting each other.
+
+```matlab
+src = opr_filename_out(param,'surf');
+dst = opr_filename_out(param,'surf_yourname');
+if ~exist(dst,'dir'); mkdir(dst); end
+copyfile(fullfile(src,sprintf('Data_%s_%03d.mat',param.day_seg,frm)), dst);
+surfdata_source = 'surf_yourname';
+imb.run_slice_browser;
+```
+
+Copy rather than start empty. If the surfdata file does not exist,
+`run_slice_browser` creates one with **no surfaces in it**, so there is no
+`bottom` to pick and no tracker result to start from.
+
+**Different TRW-S starting values.** For a rough bed where the defaults
+flatten the pick across track:
+
+```matlab
+trws_param = struct('ct_weight',0.03,'gt_range',3);
+imb.run_slice_browser;
+```
+
+### What happens to the browser that is already open
+
+When a slice browser is already open, `run_slice_browser` asks:
+
+```text
+Delete existing slice browsers? (Y/n):
+```
+
+!!! warning "Save before you answer `Y`"
+    `Y` (or Enter) closes the open browsers **without asking to save**.
+    Any picks since your last `s` are lost. Press `s` in the old browser
+    first. Closing a window with the mouse does ask; this prompt does not.
+
+Answer `n` to keep the old browser open next to the new one, for example to
+compare two crossing segments. Each browser has its own windows and saves to
+its own file.
+
+The image is loaded again only when its filename changes. If you re-ran the
+array or collation and the file on disk changed under the same name, run
+`clear run_slice_browser_fn` first so it is loaded fresh.
+
+### Picking a series of segments from one season
+
+Keep a small script with the list of frames to pick and run it one section
+at a time. Run the first section once per MATLAB session, then the second
+section each time you finish a frame.
+
+```matlab
+%% pick_2014_Greenland_P3.m
+
+%% Setup: run once
+param = struct('radar_name','rds','season_name','2014_Greenland_P3');
+todo = {                       % segment, frames
+  '20140401_03', 39:42
+  '20140415_05', [3 4 7]
+  '20140506_01', 2:4
+};
+out_type = 'music';
+surfdata_source = 'surf';
+sb_param = struct('step_size',10);
+trws_param = [];
+seg_idx = 1;
+frm_idx = 1;
+
+%% Next frame: run after finishing each one
+global gslice_browser
+if ~isempty(gslice_browser) && isvalid(gslice_browser(end))
+  gslice_browser(end).save();  % the prompt below would close it unsaved
+end
+if seg_idx > size(todo,1)
+  disp('All frames done.');
+  return
+end
+param.day_seg = todo{seg_idx,1};
+frms = todo{seg_idx,2};
+frm = frms(frm_idx);
+fprintf('Picking %s frame %03d (%d of %d in this segment)\n', ...
+  param.day_seg, frm, frm_idx, numel(frms));
+imb.run_slice_browser;         % press Enter to close the previous browser
+
+frm_idx = frm_idx + 1;
+if frm_idx > numel(frms)
+  seg_idx = seg_idx + 1;
+  frm_idx = 1;
+end
+```
+
+- `seg_idx` and `frm_idx` live in the workspace. If MATLAB restarts, set
+  them to where you stopped and run the setup section without resetting
+  them.
+- Frames you cannot pick still get opened. Mark them bad quality (`p` in the
+  surface window around the whole frame) and move on, so the DEM step does
+  not use the tracker's guess.
+- Adjacent frames share an edge. When you start a new frame, look at the
+  first few slices against the end of the previous one so the bed does not
+  jump at the boundary.
+
 ## TRW-S options
 
 Click **Options** with TRW-S selected to open its settings. Most picking is
@@ -298,8 +486,8 @@ The slice browser needs two files for the frame:
 - the 3D image, `CSARP_music/YYYYMMDD_SS/Data_YYYYMMDD_SS_FFF.mat`
 - the surfdata, `CSARP_surf/YYYYMMDD_SS/Data_YYYYMMDD_SS_FFF.mat`
 
-If the surfdata does not exist, `run_slice_browser` creates an empty one
-from the image. After picking, `run_surfdata_to_DEM.m` turns the corrected
+If the surfdata does not exist, `run_slice_browser` creates one with no
+surfaces in it, so run collation first. After picking, `run_surfdata_to_DEM.m` turns the corrected
 surfdata into a DEM.
 
 ??? note "Producing them: array processing and collation"
@@ -310,11 +498,16 @@ surfdata into a DEM.
     | Picking (this page) | `imb.run_slice_browser.m` | corrected surfdata |
     | [3D DEM generation](https://gitlab.com/openpolarradar/opr/-/wikis/3D-DEM-Generation) | `run_surfdata_to_DEM.m` | DEM |
 
-    Run array processing and collation through
-    [Slurm](../working-remotely/cluster.md), not on a login node. For a
-    segment nobody has processed, coherent-noise removal and receiver
-    equalization come before any of this and decide whether the angles mean
-    anything: see [across-track energy](swath-across-track-energy.md).
+    MUSIC (`CSARP_music`) is a method we use a lot rather than the
+    standard periodogram output, but there are other methods that operate
+    on the covariance matrix that characterizes the combined receive
+    waveforms.
+
+    These jobs take a long time, so run them through
+    [Slurm](../working-remotely/cluster.md). For a segment nobody has
+    processed, we first have to run scripts that remove coherent noise and
+    equalize receiver channels. See
+    [across-track energy, start to finish](swath-across-track-energy.md).
 
     `tomo.run_collate.m` has three steps, each behind a flag:
 
