@@ -99,36 +99,32 @@ Launch through `imb.run_slice_browser.m`. There are several
 Each primary surface carries a stack of related surfaces, and knowing which one
 you are editing is most of the battle:
 
-| Surface | What it is | Can you edit it? |
-|---|---|---|
-| **Active** | The final two-way traveltime for this surface | No — only the tracker writes it |
-| **Ground Truth** | Your supplied points, used to steer the tracker | Yes — add and delete |
-| **Mask** | Binary ice mask; true means the surface may differ from air-ice | Indirectly |
-| **Quality** | Binary; false excludes the point from generated products | Yes |
-| **Surface** | Two-way traveltime to the air-ice surface | Aids the tracker |
+| Surface | Description |
+|---|---|
+| **Active** | The final two-way traveltime for this surface | 
+| **Ground Truth** | Your supplied points, used to steer the tracker | 
+| **Mask** | Binary ice mask; true means the surface may differ from air-ice | 
+| **Quality** | Binary; false excludes the point from generated products | 
+| **Surface** | Two-way traveltime to the air-ice surface |
 
-The workflow is therefore **not** "draw the layer". It is: place ground truth,
-run the tracker, inspect, add ground truth where it went wrong, re-run. You are
-steering an optimizer, not drawing.
+Picking involves adding ground truth points to the image ground_gt, runing the tracker (apply TRW-S), inspect, add ground truth where it went wrong, re-run. Typically as long as you add ground truth every 5 traces the tracker can automatically deterct the bed.
 
 ### The tools
 
-| Tool | What it does |
+| Tool | Description |
 |---|---|
 | **TRW-S** | Tree-reweighted sequential tracker. Uses ground truth, ice surface and ice mask to write the active surface. Right-click and drag over a region, then select TRW-S. |
 | **Delete** | Removes ground truth in the dragged region. |
 | **Quality** | Right-click and drag sets quality to bad; **hold shift** to set good. Press `p` / `P` for a polygon select instead of a box. |
 
-### Three windows, one cursor
+### echogram, across track and surface windows
 
 The slice browser shows a **slice** view (the cross-track image at one range
 line), a **surface** view (the tracked surface in map-ish view), and an
-**echogram** view. Mouse motion in one moves trackers in the others, which is
-how you keep your place.
+**echogram** view. Use your mouse motion to move between trackers.
 
-As in `imb.picker`, `z` toggles between **zoom** mode (the default) and **tool**
-mode. Almost every "the clicks are doing nothing useful" moment is being in the
-wrong mode.
+To toggle between **zoom** mode (the default) and **tool**
+mode press z.
 
 ### Keyboard
 
@@ -145,9 +141,8 @@ Navigation, which you will use constantly:
 | `ctrl-z` | Zoom to full dataset |
 | `F1` | Print all shortcuts to the console |
 
-The copy-forward keys (`n`, `m`, `h`, `j`) are the ones that make picking a
-long line tractable — a layer that changes slowly across track can be carried
-slice to slice and nudged, rather than re-picked.
+The copy-forward keys (`n`, `m`, `h`, `j`) are intended to make picking a
+long line a lot faster for layers that changes slowly in the across track trace-to-trace.
 
 `step_size` is settable in the constructor or as a property during operation.
 
@@ -157,29 +152,11 @@ slice to slice and nudged, rather than re-picked.
 and drag paints it along the mouse track; right click toggles selection of a
 column; right click and drag selects which elevation bins get operated on.
 
-**Surface window** — left or right click jumps the slice window to that slice;
-double click changes the slice view; **right click and drag applies the active
-tool** to the region. Modifier keys change behaviour: shift with the quality
-tool sets good instead of bad.
+**Surface window** — left or right click jumps the slice window to that slice.
+Double click changes the slice view; **right click and drag applies the active
+tool** to the region. Modifier keys shift bewteen quality tool selected (good or bad).
 
 **Echogram window** — any click jumps the slice window to that slice.
-
-## Doing this remotely
-
-The slice browser is a genuinely interactive GUI with three linked windows, so
-it is the clearest case in this whole wiki for **using ThinLinc rather than X11
-forwarding**. Over X11 the redraws are slow enough that copy-forward picking
-stops being viable.
-
-- Run the heavy stages (array processing, collation) through
-  [Slurm](../working-remotely/cluster.md), detached, and let them finish while
-  you are asleep.
-- Do the picking in a [ThinLinc session](../getting-started/thinlinc.md), and
-  **disconnect rather than log out** (F8 → Disconnect) so the session and its
-  loaded frame are still there tomorrow.
-- On a Mac, remember the modifier remapping: right Command is Super, left
-  Command is Alt. Shortcuts involving Alt will not do what the docs say
-  otherwise.
 
 ## Stage 4 — DEM
 
